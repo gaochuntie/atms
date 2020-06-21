@@ -25,6 +25,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
           public void onClick(View v) {
               Devices d=Devices_List.get(holder.getAdapterPosition());
               install_mobile.DEVICEID=d.getId();
+              install_mobile.selecteddevice=d;
               steptwo.chosenname.setText("选择了 ： "+d.getName());
               Snackbar.make(v,"您选择了： "+d.getName(),Snackbar.LENGTH_SHORT).show();
 
@@ -50,6 +51,7 @@ public class DevicesAdapter extends RecyclerView.Adapter<DevicesAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Devices d = Devices_List.get(position);
         holder.devicename.setText(d.name);
+        holder.devicename.startAnimation(MainActivity.translateAnimation);
     }
 
     @Override

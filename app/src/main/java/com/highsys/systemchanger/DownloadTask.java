@@ -1,5 +1,6 @@
 package com.highsys.systemchanger;
 
+import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class DownloadTask extends AsyncTask <String,Integer,Integer>{
     public static final int TYPE_CANCELED=3;
 
 
+    @SuppressLint("WrongThread")
     @Override
     protected Integer doInBackground(String... strings) {
         InputStream is=null;
@@ -106,8 +108,8 @@ public class DownloadTask extends AsyncTask <String,Integer,Integer>{
          }
      }
      if (progress==-100){
-         stepthree.process.setText("下载失败");
-         Snackbar.make(stepthree.snackview,"Download Failed",Snackbar.LENGTH_SHORT).show();
+         //stepthree.process.setText("下载失败");
+         //Toast.makeText(MyApplication.getContext(),"下载失败",Toast.LENGTH_SHORT).show();
      }
     }
 

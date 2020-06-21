@@ -20,11 +20,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileUtils;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -53,10 +56,13 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
     public static int NEXTCODE = 1;
     public static View action_box;
     public static Button next;
+    public static AppCompatActivity ac;
     public static Button stop;
     public static int DEVICEID = -1;
+    public static Devices selecteddevice;
     public static final int REQUEST_CODE = 1;
     private DownloadService.DownloadBinder downloadBinder;
+
     private ServiceConnection connection=new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
@@ -81,6 +87,7 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
         if (actionbar != null) {
             actionbar.hide();
         }
+        ac=this;
         stop = findViewById(R.id.stop);
         stop.setOnClickListener(this);
         next = findViewById(R.id.next);
@@ -99,6 +106,13 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
         Intent intent=new Intent(this,DownloadService.class);
         startService(intent);
         bindService(intent,connection,BIND_AUTO_CREATE);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                setCommand.execCommand(new String[]{"dd if=/dev/block/bootdevice/by-name/recovery of=/sdcard/highsys/backups/backup_rec.img"},true,false);
+
+            }
+        }).start();
     }
 
     public void replaceFragment(Fragment frag) {
@@ -137,20 +151,44 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
                     if (DEVICEID == -1) {
                         Snackbar.make(v, "请选择合适的设备", Snackbar.LENGTH_SHORT).show();
                     } else {
-                        String url="http://175.24.94.146/highsysrec/violet.img";
-                        downloadBinder.startDownload(url);
+                        downloadBinder.startDownload(selecteddevice.getAddress());
+                        Log.d("install_mobile",selecteddevice.getAddress());
                         replaceFragment(new stepthree());
                         //startDownload
                     }
 
                     Log.d("install_mobile", "STEPTWO");
                 }
+                if (NEXTCODE==3){
+                    replaceFragment(new stepfour());
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setCommand.execCommand(new String[]{"dd if=/sdcard/highsys/temp/"+selecteddevice.getName()+" of=/dev/block/bootdevice/by-name/recovery"},true,false);
+                        }
+                    }).start();
+                }
+                if (NEXTCODE==4){
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setCommand.execCommand(new String[]{"reboot recovery"},true,false);
+                        }
+                    }).start();
+                }
                 break;
             case R.id.stop:
                 if (NEXTCODE==2){
                     downloadBinder.onPauseDownload();
                 }
-                Snackbar.make(v, "recovery已恢复", Snackbar.LENGTH_SHORT).show();
+                Toast.makeText(MyApplication.getContext(), "recovery已恢复", Toast.LENGTH_SHORT).show();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setCommand.execCommand(new String[]{"dd if=/sdcard/highsys/backups/backup_rec.img of=/dev/block/bootdevice/by-name/recovery"},true,false);
+
+                    }
+                }).start();
                 finish();
                 break;
             default:
@@ -175,4 +213,13 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
         super.onDestroy();
         unbindService(connection);
     }
+    public  void refreshdevice(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                steptwo.ada.notifyDataSetChanged();
+            }
+        });
+    }
+
 }

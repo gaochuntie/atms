@@ -43,6 +43,7 @@ public class DownloadService extends Service {
             stepthree.process.setText("下载成功");
             install_mobile.next.setVisibility(View.VISIBLE);
             stepthree.process_pic.setImageResource(R.drawable.dual);
+            install_mobile.NEXTCODE=3;
         }
 
         @RequiresApi(api = Build.VERSION_CODES.O)
@@ -52,7 +53,6 @@ public class DownloadService extends Service {
             stopForeground(true);
             getNotificationManager().notify(1,getNotification("Download Failed",-1));
             Toast.makeText(DownloadService.this,"Download Failed",Toast.LENGTH_SHORT).show();
-            stepthree.process.setText("下载失败");
 
         }
 

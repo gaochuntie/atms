@@ -34,13 +34,14 @@ public class stepthree extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.stepthree, container, false);
+        process=view.findViewById(R.id.process_percent);
+        process_pic=view.findViewById(R.id.process_pic);
         view.startAnimation(MainActivity.translateAnimation2);
         install_mobile.action_box.startAnimation(MainActivity.translateAnimation2);
         install_mobile.NEXTCODE=3;
         install_mobile.next.setVisibility(View.GONE);
         snackview=container;
-        process=view.findViewById(R.id.process_percent);
-        process_pic=view.findViewById(R.id.process_pic);
+
         return view;
     }
 }

@@ -10,14 +10,20 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Choose ： "
-            android:textSize="30dp"
-            android:textColor="#000000"
-            android:layout_marginBottom="7dp"
-            android:layout_marginHorizontal="20dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose ： "
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:layout_marginBottom="7dp"
+                android:layout_marginHorizontal="20dp"/>
+        </LinearLayout>
+
         <TextView
             android:id="@+id/chosenname"
             android:layout_width="wrap_content"
@@ -25,13 +31,21 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="5dp"
             android:textSize="10dp"
-            android:text="请选择一个合适的设备"/>
-        <view class="androidx.recyclerview.widget.RecyclerView"
-            android:id="@+id/devices_recycler"
-            android:layout_width="match_parent"
+            android:text="请选择一个合适的设备 下拉刷新"/>
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_marginBottom="7dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_height="300dp" />
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+            <view class="androidx.recyclerview.widget.RecyclerView"
+                android:id="@+id/devices_recycler"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_height="300dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </LinearLayout>
 
 
