@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    tools:context=".processdia">
+
+    <LinearLayout
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/windowsshape"
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="50dp">
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_gravity="bottom"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/iconnull"></ImageView>
+            <TextView
+                android:id="@+id/processtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:text="ATMS正在工作"
+                android:gravity="center"
+                android:textSize="15dp"
+                android:textColor="#001B1C"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00D19636"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="match_parent" />
+
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:src="@drawable/preadim" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/promsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="剩下的就交给我吧！"
+                android:textColor="#131111" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

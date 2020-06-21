@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="20dp"
+    android:layout_marginTop="50dp"
+    app:cardCornerRadius="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Installation"
+            android:textSize="30dp"
+            android:textColor="#000000"
+            android:layout_marginBottom="7dp"
+            android:layout_marginHorizontal="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginBottom="7dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"
+            android:text="您即将进行双系统安装操作，请确认您知道这意味着什么，请立即做好一切数据备份，并且root您的设备.我们将会在稍后替换您现有的recovery，完成双系统安装后，您可以自行恢复到原来的recovery,并且您必须在同意《欢迎》界面中的声明后才可继续"
+            android:textColor="#000000"/>
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

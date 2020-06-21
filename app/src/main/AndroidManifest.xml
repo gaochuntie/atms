@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.highsys.systemchanger">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <application
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/icon"
+        android:label="ATMS"
+        android:requestLegacyExternalStorage="true"
+        android:roundIcon="@drawable/icon"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".install_mobile"></activity>
+        <activity
+            android:name=".fingers"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".installsystems"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".allerros"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity android:name=".virtualsdcard" />
+        <activity
+            android:name=".supportme"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".aboutme"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".advence"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity android:name=".thehelps" />
+        <activity
+            android:name=".processdia"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".setvalues"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".power"
+            android:launchMode="standard"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".start"
+            android:launchMode="standard"
+            android:theme="@style/MyDialogStyleBottom" />
+        <activity
+            android:name=".hello"
+            android:launchMode="standard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="standard"
+            android:theme="@style/MyDialogStyleBottom">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name=".DownloadService"
+            android:enabled="true"
+            android:exported="true"></service>
+    </application>
+
+</manifest>

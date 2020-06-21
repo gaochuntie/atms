@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#00000000"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    tools:context=".aboutme">
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:background="@drawable/windowsshape"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_width="300dp"
+            android:layout_height="450dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:src="@drawable/iconnull"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="ATMS"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:textSize="10dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:textColor="#454545"
+                android:text="Highsys: Welcome to use ATMS - Android To Many Systems.This project only processed by a middle school student.So,too many problems haven't been worked out.And I suggest you should install busybox before running it.Why? Just I don't know.\n\ncoolapk@Gaochuntie\ncoolapk@Rannki\nhttp://highsys.natapp1.cc\n2041469901@qq.com"/>
+            <TextView
+                android:layout_width="200dp"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:text="\nBeta vesion code 0502"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:text=""
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:layout_gravity="center"
+                android:gravity="center"/>
+
+            <Button
+                android:id="@+id/backto"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:background="@drawable/buttonshape"
+                android:text="返回"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

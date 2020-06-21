@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="#00000000"
+    android:layout_height="match_parent"
+    tools:context=".fingers">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@drawable/fingershape"
+        android:orientation="vertical"
+        android:layout_gravity="bottom">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/fingeruser"
+        android:layout_width="200dp"
+        android:layout_height="80dp"
+        android:text="验证您的身份:"
+        android:textSize="20dp"
+        android:textColor="#026835"
+        android:gravity="center"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:src="@drawable/fingers"/>
+        <TextView
+            android:id="@+id/fingersresult"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="请触摸您的指纹传感器"
+            android:textColor="#7F5A5252"
+            android:textSize="20dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

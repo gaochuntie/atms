@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical"
+    tools:context=".installsystems">
+    <LinearLayout
+        android:orientation="vertical"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:src="@drawable/iconnull"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATMS"
+            android:textSize="40dp"
+            android:gravity="center"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="70dp"
+            android:layout_height="wrap_content"
+            android:text="欢迎使用ATMS(原FeO产品)，这是双系统安装工具Linux版，测试为Ubuntu20.4，仅支持@Rannki适配了的机器，你可以访问以下途径获取，此工具可以引领你快速简单的安装双系统而无需进行繁琐的操作\n\n本工具未收取任何费用，禁止一切形式的修改，二次创作\n"
+            android:textSize="15dp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/anous"
+            android:layout_marginHorizontal="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\n维护者：\n  - 高纯铁(Coolapk)\n  - 明尼苏达 (Coolapk) \n  - Rannki (Coolapk)"
+            android:layout_marginVertical="30dp"/>
+
+        <LinearLayout
+            android:layout_marginVertical="30dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/feogroup"
+                android:layout_height="match_parent"/>
+            <ImageView
+                android:layout_width="100dp"
+                android:src="@drawable/myqq"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="200dp">
+    </LinearLayout>
+    </LinearLayout>
+
+
+</ScrollView>

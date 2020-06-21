@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#000000"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".hello">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <pl.droidsonroids.gif.GifImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/home"
+                android:layout_gravity="center"/>
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/iconnull"
+                android:layout_gravity="center"/>
+            <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+                android:text="\nWelcome"
+                android:textColor="#9CD9E4"
+                android:textSize="30dp"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="3">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="0dp"
+            android:layout_weight="3">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="40dp">
+                <EditText
+                android:textColor="#FFDF00"
+                android:id="@+id/username"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:text=""
+                android:hint="请键入您的用户名"
+                    android:textColorHint="#FFFB00"
+                android:background="@drawable/winbut"/></LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="15dp"/>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="40dp">
+                <EditText
+                android:id="@+id/usid"
+                android:textColor="#FFFFDF00"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:text=""
+                android:hint="请问当前是系统几？"
+                    android:textColorHint="#FFFB00"
+                android:background="@drawable/winbut"/></LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="15dp"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="40dp">
+                <Button
+                    android:gravity="center"
+                android:id="@+id/type0"
+                android:textColor="#FFFFDF00"
+                android:layout_gravity="center"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:text="UFS"
+                android:background="@drawable/winbut"/>
+                <Button
+                    android:id="@+id/type1"
+                    android:textColor="#FFFFDF00"
+                    android:layout_gravity="center"
+                    android:layout_width="100dp"
+                    android:layout_height="40dp"
+                    android:text="EMMC"
+                    android:gravity="center"
+                    android:background="@drawable/winbut"/>
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="15dp"/>
+            <Button
+                android:id="@+id/help"
+                android:textColor="#FFFFDF00"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:text="帮助文档-Start"
+                android:background="@drawable/winbut"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"/>
+            <TextView
+                android:id="@+id/welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="自动检测到芯片类型:"
+                android:textColor="#FFFB00"
+                android:textSize="15dp"/>
+            <TextView
+                android:layout_width="200dp"
+                android:layout_gravity="left"
+                android:layout_height="wrap_content"
+                android:text="登录即代表您同意，使用本软件造成的一切后果不由本人承担：捐赠项目，请你斟酌，遇到崩溃问题请删除配置文件，请填写所有框否则空指针必定崩溃"
+                android:textColor="#CDCDA6"
+                android:textSize="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <Button
+                android:id="@+id/hellogo"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/go2"
+                android:layout_gravity="center"
+                android:text=" "
+                android:gravity="center"></Button>
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
