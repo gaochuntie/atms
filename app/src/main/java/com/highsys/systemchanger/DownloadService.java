@@ -101,6 +101,7 @@ public class DownloadService extends Service {
             }
             if (downloadurl!=null){
                 String filename=downloadurl.substring(downloadurl.lastIndexOf("/"));
+                install_mobile.downloaddevicename=filename;
                 String directory="/sdcard/highsys/temp";
                 File file=new File(directory+filename);
                 if (file.exists()){

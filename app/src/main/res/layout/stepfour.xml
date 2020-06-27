@@ -21,6 +21,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="请等待至少10s"
+            android:textSize="15dp"
+            android:textColor="#780606"
+            android:layout_marginBottom="7dp"
+            android:layout_marginHorizontal="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="现在请重启进入rec，点击高级里面的 （切换到系统1）安装其补丁，然后重启rec，安装（初始化双系统）补丁，然后请刷入您的第一个系统，然后刷入magisk以及各种取消验证的补丁尤其岁AVB2.0必须关闭，然后刷入（ATMS初始化）\n    然后重启rec，以（切换到系统2）补丁代替（切换到系统1）补丁重复操作\n    最后开机，可以直接进rec刷（切换到系统×）无需初始化，就可以切换系统了，也可以通酷安搜索ATMS下载安装即可直接开机一键切换 "
             android:textSize="15dp"
             android:textColor="#000000"

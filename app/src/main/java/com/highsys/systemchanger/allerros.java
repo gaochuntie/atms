@@ -12,6 +12,8 @@ import android.widget.Toast;
 public class allerros extends AppCompatActivity {
     public static String erromsg = null;
     public static int backpressed = 0;
+    public static int BACKPRESSENABLE = 1;
+    public static int BACKPRESSDISABLE =0;
     TextView tv;
     public int indexc=0;
 

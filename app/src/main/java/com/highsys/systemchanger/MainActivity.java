@@ -149,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
             if (msg.what == 01) {
                 hitpross();
                 Toast.makeText(MainActivity.this, "配置文件不存在或者为空，即将创建默认！", Toast.LENGTH_LONG).show();
-                int a = setup.seten();
+                int a =tools.seten();
                 //初始化文件
                 initfile();
                 //重写配置文件
@@ -407,7 +407,7 @@ public class MainActivity extends AppCompatActivity {
         showpross("海内存知己，天涯若比邻\n请稍等...","ATMS正在启动");
         //test the setup file
 
-        //存储权限
+        //检测
 
         new Thread(new Runnable() {
             @Override

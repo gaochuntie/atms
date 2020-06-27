@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -52,6 +53,18 @@ public class hello extends AppCompatActivity {
                     settings.allsettings[0]="0";
                 }
                 h.sendEmptyMessage(00);
+                try {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(hello.this,settings.getTempdir(),Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    tools.preaik(hello.this);
+                }catch (Exception e ){
+                    meterro(e.getMessage(),allerros.BACKPRESSENABLE);
+                }
+
             }
         }).start();
         ///
@@ -132,5 +145,13 @@ public class hello extends AppCompatActivity {
             }
 
         }).start();
+    }
+    public void meterro(String err,int backpres){
+        settings.processcache=1;
+        allerros.backpressed=backpres;
+        allerros.erromsg=err;
+        Intent ii =new Intent(hello.this,allerros.class);
+        startActivity(ii);
+
     }
 }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textColor="#0C0C0C"
-        android:textSize="20dp"
+        android:textSize="12dp"
         android:gravity="center|left"
         android:text="unknow"/>
 </androidx.cardview.widget.CardView>

@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class advence extends AppCompatActivity {
     Button unpack;
     Button repack;
@@ -231,7 +233,7 @@ public class advence extends AppCompatActivity {
         allrun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Snackbar.make(v,"管理员QQ:364988395 | Rec Maker QQ : 2094858273",Snackbar.LENGTH_LONG).show();
             }
         });
     }

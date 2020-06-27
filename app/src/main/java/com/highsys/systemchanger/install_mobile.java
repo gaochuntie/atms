@@ -60,6 +60,7 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
     public static Button stop;
     public static int DEVICEID = -1;
     public static Devices selecteddevice;
+    public static String downloaddevicename;
     public static final int REQUEST_CODE = 1;
     private DownloadService.DownloadBinder downloadBinder;
 
@@ -164,7 +165,10 @@ public class install_mobile extends AppCompatActivity implements View.OnClickLis
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-                            setCommand.execCommand(new String[]{"dd if=/sdcard/highsys/temp/"+selecteddevice.getName()+" of=/dev/block/bootdevice/by-name/recovery"},true,false);
+                            String filename=selecteddevice.getAddress().substring(selecteddevice.getAddress().lastIndexOf("/"));
+                            setCommand.resultCom resultCom= setCommand.execCommand(new String[]{"dd if=/sdcard/highsys/temp"+filename+" of=/dev/block/bootdevice/by-name/recovery"},true,true);
+                            Log.d("SHELL",filename);
+                            Log.d("SHELL", resultCom.error+"\n"+resultCom.ok);
                         }
                     }).start();
                 }

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#000000"
+    android:background="#FFFFFF"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".hello">
@@ -17,14 +17,10 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-            <pl.droidsonroids.gif.GifImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/home"
-                android:layout_gravity="center"/>
+
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/iconnull"
                 android:layout_gravity="center"/>
             <TextView
@@ -66,6 +62,7 @@
                 android:background="@drawable/winbut"/></LinearLayout>
 
             <TextView
+                android:text=" "
                 android:layout_width="match_parent"
                 android:layout_height="15dp"/>
             <LinearLayout
@@ -85,6 +82,7 @@
                 android:background="@drawable/winbut"/></LinearLayout>
 
             <TextView
+                android:text=" "
                 android:layout_width="match_parent"
                 android:layout_height="15dp"/>
 
@@ -115,6 +113,7 @@
 
 
             <TextView
+                android:text=" "
                 android:layout_width="match_parent"
                 android:layout_height="15dp"/>
             <Button
@@ -126,6 +125,7 @@
                 android:text="帮助文档-Start"
                 android:background="@drawable/winbut"/>
             <TextView
+                android:text=" "
                 android:layout_width="match_parent"
                 android:layout_height="30dp"/>
             <TextView
