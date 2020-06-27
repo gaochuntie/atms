@@ -77,7 +77,7 @@ public class steptwo extends Fragment {
                     Device_List.clear();
                     OkHttpClient client=new OkHttpClient();
                     Request request=new Request.Builder()
-                            .url("http://175.24.94.146/highsysrec/reclist.txt")
+                            .url("https://highsysrec-1259456701.cos.ap-chengdu.myqcloud.com/reclist.txt")
                             .build();
                     Response response=client.newCall(request).execute();
                     StringBuffer first= new StringBuffer(response.body().string());
