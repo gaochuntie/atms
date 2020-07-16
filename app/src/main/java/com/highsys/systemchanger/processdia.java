@@ -17,12 +17,24 @@ import android.transition.Slide;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 
 public class processdia extends AppCompatActivity {
+    public  Animation animation= AnimationUtils.loadAnimation(MyApplication.getContext(),R.anim.push_bottom_in);
+    public  Animation animationout= AnimationUtils.loadAnimation(MyApplication.getContext(),R.anim.push_bottom_out);
+
+    public static int isBACKPRESS=1;
+    public LinearLayout process_parent;
+    public static int BACKPRESS_ENABLE=0;
+    public static int BACKPRESS_DISABLE=1;
+    public static int PROCESS_FINISH=1;
+    public static int PROCESS_RUNNING=0;
     private CustomVideoView videoview;
     Handler h =new Handler(){
         @Override
@@ -44,11 +56,8 @@ public class processdia extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_processdia);
         //权限
-
 
         //
         ActionBar actionbar = getSupportActionBar();
@@ -56,6 +65,24 @@ public class processdia extends AppCompatActivity {
             actionbar.hide();
         }
         //
+        animationout.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                finish();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        process_parent=findViewById(R.id.process_parent);
+        process_parent.startAnimation(animation);
         TextView promsg=findViewById(R.id.promsg);
         TextView protitle=findViewById(R.id.processtitle);
         protitle.setText(settings.processtitle);
@@ -78,9 +105,19 @@ public class processdia extends AppCompatActivity {
 
    @Override
    public void onBackPressed() {
-       Toast.makeText(processdia.this,"无为在歧路，不妨等一等",Toast.LENGTH_SHORT).show();
-   }
+        if (isBACKPRESS==BACKPRESS_ENABLE){
+            process_parent.startAnimation(animationout);
+        }else {
+            Toast.makeText(processdia.this,"无为在歧路，不妨等一等",Toast.LENGTH_SHORT).show();
+        }
 
+   }
+   public static void setIsBACKPRESS(int i){
+        isBACKPRESS=i;
+   }
+   public static void setProcess(int i ){
+        settings.processcache=i;
+   }
     //防止锁屏或者切出的时候，音乐在播放
   // public void initView(){
   //     //加载视频资源控件
@@ -97,4 +134,11 @@ public class processdia extends AppCompatActivity {
   //         }
   //     });
   // }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+
+    }
 }

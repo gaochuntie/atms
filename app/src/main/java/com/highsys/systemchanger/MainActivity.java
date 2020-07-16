@@ -15,13 +15,20 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.highsys.pages.SysSelecter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Handler;
 import android.os.Message;
@@ -39,6 +46,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.tools.ant.Main;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.EOFException;
@@ -49,28 +58,24 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class MainActivity extends AppCompatActivity {
+    public static String SETUPFILE="0";
     public static Animation translateAnimation;
     public static Animation translateAnimation2;
     private static final String TAG = "MyCallBack";
     //filer
-    String[] setmsg;
+    String[] setmsg=new String[100];
     //
     MediaPlayer m;
-    FloatingActionButton fab;
     AlertDialog.Builder meterr;
     AlertDialog.Builder noroot;
-    Button exitwin;
-    Button sys1;
-    Button sys2;
-    Button adventage;
-    Button backups;
     setCommand.resultCom r;
     String erromse;
-    TextView sdtype;
     ProgressDialog pd;
-    TextView restoredir;
     String workmsg;
     String worktitle;
+    Button show_nav;
+    public  static NavigationView nav_view;
+    DrawerLayout draw_view;
 
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] PERMISSIONS_STORAGE = {
@@ -83,54 +88,30 @@ public class MainActivity extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what==88){
-                File f = new File("/sdcard/highsys/setup.txt");
-                if (f.exists()) {
-                    try {
-                        FileReader fr = new FileReader(f);
-                        BufferedReader br = new BufferedReader(fr);
-                        //测试配置文件
-                        setmsg[0] = br.readLine();
-                        if (setmsg[0] == null) {
-                            h.sendEmptyMessage(01);
-                            fr.close();
-                            br.close();
-                        }
-                        if (setmsg[0] != null) {
-                            h.sendEmptyMessage(00);
-                            int i=1;
-                            while ((setmsg[i] = br.readLine())!=null){
-                                i++;
-
-                            }
-                            settings.allsettings[0]=setmsg[0];
-                            settings.allsettings[1]=setmsg[1];
-                            settings.allsettings[2]=setmsg[2];
-                            settings.allsettings[3]=setmsg[3];
-                            settings.allsettings[4]=setmsg[4];
-                            settings.allsettings[5]=setmsg[5];
-                            settings.allsettings[6]=setmsg[6];
-                            settings.allsettings[7]=setmsg[7];
-                            settings.allsettings[8]=setmsg[8];
-                            //音乐
-                            if (settings.allsettings[1].equals("0")){
-                                hmedia.sendEmptyMessage(1);
-                            }
-                            //shell
-                            if(settings.allsettings[5]!=null && settings.allsettings[5].equals("0")!=true){
-                                tools.onshell(settings.allsettings[5]);
-                            }
-                            h.sendEmptyMessage(04);
-                            fr.close();
-                            br.close();
-                        }
-
-                    } catch (Exception e) {
-                        erromse=e.getMessage();
-                        h.sendEmptyMessage(-2);
+               //
+                if (setmsg[0] != null) {
+                    h.sendEmptyMessage(00);
+                    settings.allsettings[0]=setmsg[0];
+                    Log.d(TAG,"setmsg");
+                    settings.allsettings[1]=setmsg[1];
+                    Log.d(TAG,"setmsg1");
+                    settings.allsettings[2]=setmsg[2];
+                    settings.allsettings[3]=setmsg[3];
+                    settings.allsettings[4]=setmsg[4];
+                    settings.allsettings[5]=setmsg[5];
+                    settings.allsettings[6]=setmsg[6];
+                    settings.allsettings[7]=setmsg[7];
+                    Log.d(TAG,setmsg[7]);
+                    settings.allsettings[8]=setmsg[8];
+                    //音乐
+                    if (settings.allsettings[1].equals("0")){
+                        hmedia.sendEmptyMessage(1);
                     }
-
-                } else if (!f.exists()){
-                    h.sendEmptyMessage(01);
+                    //shell
+                    if(settings.allsettings[5]!=null && settings.allsettings[5].equals("0")!=true){
+                        tools.onshell(settings.allsettings[5]);
+                    }
+                    h.sendEmptyMessage(04);
                 }
                 com.highsys.systemchanger.fingers.fingermode=1;
                 Intent i =new Intent(MainActivity.this,com.highsys.systemchanger.fingers.class);
@@ -208,9 +189,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
+      //  this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
+      //  this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+      //          WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
         setContentView(R.layout.activity_main);
         //aik
         //settings.packpath=getApplicationContext().getPackageResourcePath();
@@ -247,141 +228,215 @@ public class MainActivity extends AppCompatActivity {
         //packpath
         settings.packpath=getApplicationContext().getPackageResourcePath();
         //
-        restoredir=findViewById(R.id.restoredir);
-        sdtype=findViewById(R.id.sdtype);
-        sys1=findViewById(R.id.btn1);
-        sys1.setText("切换到系统1");
-        sys2=findViewById(R.id.btn2);
-        sys2.setText("切换到系统2");
-        backups=findViewById(R.id.btn3);
-        backups.setText("备份系统文件");
-        adventage=findViewById(R.id.btn4);
-        adventage.setText("高级工具箱");
-        exitwin=findViewById(R.id.exitwin);
-        fab = findViewById(R.id.fab);
+        draw_view=findViewById(R.id.draw_view);
+        nav_view=findViewById(R.id.nav_view);
+        show_nav=findViewById(R.id.show_nav);
+   // restoredir=findViewById(R.id.restoredir);
+   // sdtype=findViewById(R.id.sdtype);
+   // backups=findViewById(R.id.btn3);
+   // backups.setText("备份系统文件");
+   // adventage=findViewById(R.id.btn4);
+   // adventage.setText("高级工具箱");
+   // fab = findViewById(R.id.fab);
          translateAnimation = AnimationUtils.loadAnimation(MyApplication.getContext(), R.anim.fragment_enter);
         translateAnimation2 = AnimationUtils.loadAnimation(MyApplication.getContext(), R.anim.fragment_enter);
         //执行动画
         //setup
-        sys1.setOnClickListener(new View.OnClickListener() {
+        nav_view.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                showpross("惶恐滩头说惶恐，系统2来系统1\n请稍后...","Changing System!");
-                //ufs
-               if(Integer.valueOf(settings.allsettings[0])==0){
-                   new Thread(new Runnable() {
-                       @Override
-                       public void run() {
-                           r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sda1 bs=512 count=1024 of=/dev/block/sda","dd if="+settings.allsettings[3]+"sde1 bs=512 count=1024 of=/dev/block/sde","dd if="+settings.allsettings[3]+"boot1 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo1 of=/dev/block/by-name/dtbo","reboot"},true,false);
-
-                       }
-                   }).start();
-                  // showpross("正在切换到系统1，稍后重启！","切换状态");
-                   }
-               if (Integer.valueOf(settings.allsettings[0])==1){
-                   new Thread(new Runnable() {
-                       @Override
-                       public void run() {
-                           r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sys1 bs=512 count=1024 of=/dev/block/mmcblk0","dd if="+settings.allsettings[3]+"boot1 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo1 of=/dev/block/by-name/dtbo","reboot"},true,false);
-
-                       }
-                   }).start();
-                  // showpross("正在切换到系统1，稍后重启！","切换状态");
-                   }else if (Integer.valueOf(settings.allsettings[0])!=0&&Integer.valueOf(settings.allsettings[0])!=1){
-                  meterro("切换到系统1失败！未知的存储类型！",1);
-               }
-               //切换系统1
-          }
-        });
-        sys2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showpross("惶恐滩头说惶恐，系统1来系统2\n请稍后...","Changing System!");
-               if(Integer.valueOf(settings.allsettings[0])==0){
-                   new Thread(new Runnable() {
-                       @Override
-                       public void run() {
-                           r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sda2 bs=512 count=1024 of=/dev/block/sda","dd if="+settings.allsettings[3]+"sde2 bs=512 count=1024 of=/dev/block/sde","dd if="+settings.allsettings[3]+"boot2 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo2 of=/dev/block/by-name/dtbo","reboot"},true,false);
-
-                       }
-                   }).start();
-                  // showpross("正在切换到系统2，稍后重启！","切换状态");
-                   }
-               if (Integer.valueOf(settings.allsettings[0])==1){
-                   new Thread(new Runnable() {
-                       @Override
-                       public void run() {
-                           r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sys2 bs=512 count=1024 of=/dev/block/mmcblk0","dd if="+settings.allsettings[3]+"boot2 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo2 of=/dev/block/by-name/dtbo","reboot"},true,false);
-
-                       }
-                   }).start();
-                //   showpross("正在切换到系统1，稍后重启！","切换状态");
-                     }else if (Integer.valueOf(settings.allsettings[0])!=0&&Integer.valueOf(settings.allsettings[0])!=1){
-                   meterro("切换到系统2失败！未知的存储类型！",1);
-               }
-                //切换系统2
-            }
-        });
-        adventage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //高级工具
-              Intent i =new Intent(MainActivity.this,advence.class);
-              startActivity(i,ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                    }
-        });
-        backups.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showpross("少壮不搞事，老大徒伤悲！\n请稍后...","Backuping Files");
-                //备份
-                if (Integer.valueOf(settings.allsettings[0])==0){
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            r=setCommand.execCommand(new String[]{"dd if=/dev/block/sda bs=512 count=1024 of="+settings.allsettings[2]+"sda"+settings.allsettings[7],"dd if=/dev/block/sde bs=512 count=1024 of="+settings.allsettings[2]+"sde"+settings.allsettings[7],"dd if=/dev/block/by-name/boot of="+settings.allsettings[2]+"boot"+settings.allsettings[7],"dd if=/dev/block/by-name/dtbo of="+settings.allsettings[2]+"dtbo"+settings.allsettings[7]},true,false);
-                            h.sendEmptyMessage(06);
-                            h.sendEmptyMessage(07);
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.test :
+                        processdia.setIsBACKPRESS(processdia.BACKPRESS_ENABLE);
+                        processdia.setProcess(processdia.PROCESS_RUNNING);
+                        startActivity(new Intent(MainActivity.this,processdia.class));
+                        break;
+                    case R.id.exitwin :
+                        System.exit(0);
+                        break;
+                    case R.id.settings :
+                        Intent i=new Intent(MainActivity.this,setvalues.class);
+                        startActivity(i);
+                        break;
+                    case R.id.choose :
+                        //
+                        replaceFragment(new SysSelecter());
+                        break;
+                    case R.id.install :
+                        //
+                        startActivity(new Intent(MainActivity.this,install_mobile.class));
+                        break;
+                    case R.id.help :
+                        //
+                        break;
+                    case R.id.supportme :
+                        Intent ii =new Intent(MainActivity.this,supportme.class);
+                        startActivity(ii);
+                        break;
+                    case R.id.backups :
+                        showpross("少壮不搞事，老大徒伤悲！\n请稍后...","Backuping Files");
+                        //备份
+                        if (Integer.valueOf(settings.allsettings[0])==0){
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    r=setCommand.execCommand(new String[]{"dd if=/dev/block/sda bs=512 count=1024 of="+settings.allsettings[2]+"sda"+settings.allsettings[7],"dd if=/dev/block/sde bs=512 count=1024 of="+settings.allsettings[2]+"sde"+settings.allsettings[7],"dd if=/dev/block/by-name/boot of="+settings.allsettings[2]+"boot"+settings.allsettings[7],"dd if=/dev/block/by-name/dtbo of="+settings.allsettings[2]+"dtbo"+settings.allsettings[7]},true,false);
+                                    h.sendEmptyMessage(06);
+                                    h.sendEmptyMessage(07);
+                                }
+                            }).start();
                         }
-                    }).start();
-                      }
-                //emmc
-                if (Integer.valueOf(settings.allsettings[0])==1){
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            r=setCommand.execCommand(new String[]{"dd if=/dev/block/mmcblk0 bs=512 count=1024 of="+settings.allsettings[2]+"sys"+settings.allsettings[7],"dd if=/dev/block/by-name/boot of="+settings.allsettings[2]+"boot"+settings.allsettings[7],"dd if=/dev/block/by-name/dtbo of="+settings.allsettings[2]+"dtbo"+settings.allsettings[7]},true,false);
-                            h.sendEmptyMessage(06);
-                            h.sendEmptyMessage(07);
+                        //emmc
+                        if (Integer.valueOf(settings.allsettings[0])==1){
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    r=setCommand.execCommand(new String[]{"dd if=/dev/block/mmcblk0 bs=512 count=1024 of="+settings.allsettings[2]+"sys"+settings.allsettings[7],"dd if=/dev/block/by-name/boot of="+settings.allsettings[2]+"boot"+settings.allsettings[7],"dd if=/dev/block/by-name/dtbo of="+settings.allsettings[2]+"dtbo"+settings.allsettings[7]},true,false);
+                                    h.sendEmptyMessage(06);
+                                    h.sendEmptyMessage(07);
+                                }
+                            }).start();
                         }
-                    }).start();
-                    }
+                        break;
+                    case R.id.advence :
+                        replaceFragment(new advence());
+                        break;
+                    case R.id.about :
+                        //
+                        break;
 
+                    default:
+                        break;
+                }
+                draw_view.closeDrawers();
+                return true;
             }
         });
-        exitwin.setOnClickListener(new View.OnClickListener(){
+        show_nav.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.exit(0);
+                draw_view.openDrawer(GravityCompat.START);
             }
         });
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i =new Intent(MainActivity.this,start.class);
-                startActivity(i,  ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
-                //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                  //      .setAction("Action", null).show();
-            }
-        });
+   //    sys1.setOnClickListener(new View.OnClickListener() {
+   //        @Override
+   //        public void onClick(View v) {
+   //            showpross("惶恐滩头说惶恐，系统2来系统1\n请稍后...","Changing System!");
+   //            //ufs
+   //           if(Integer.valueOf(settings.allsettings[0])==0){
+   //               new Thread(new Runnable() {
+   //                   @Override
+   //                   public void run() {
+   //                       r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sda1 bs=512 count=1024 of=/dev/block/sda","dd if="+settings.allsettings[3]+"sde1 bs=512 count=1024 of=/dev/block/sde","dd if="+settings.allsettings[3]+"boot1 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo1 of=/dev/block/by-name/dtbo","reboot"},true,false);
+
+   //                   }
+   //               }).start();
+   //              // showpross("正在切换到系统1，稍后重启！","切换状态");
+   //               }
+   //           if (Integer.valueOf(settings.allsettings[0])==1){
+   //               new Thread(new Runnable() {
+   //                   @Override
+   //                   public void run() {
+   //                       r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sys1 bs=512 count=1024 of=/dev/block/mmcblk0","dd if="+settings.allsettings[3]+"boot1 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo1 of=/dev/block/by-name/dtbo","reboot"},true,false);
+
+   //                   }
+   //               }).start();
+   //              // showpross("正在切换到系统1，稍后重启！","切换状态");
+   //               }else if (Integer.valueOf(settings.allsettings[0])!=0&&Integer.valueOf(settings.allsettings[0])!=1){
+   //              meterro("切换到系统1失败！未知的存储类型！",1);
+   //           }
+   //           //切换系统1
+   //      }
+   //    });
+     //  sys2.setOnClickListener(new View.OnClickListener() {
+     //      @Override
+     //      public void onClick(View v) {
+     //          showpross("惶恐滩头说惶恐，系统1来系统2\n请稍后...","Changing System!");
+     //         if(Integer.valueOf(settings.allsettings[0])==0){
+     //             new Thread(new Runnable() {
+     //                 @Override
+     //                 public void run() {
+     //                     r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sda2 bs=512 count=1024 of=/dev/block/sda","dd if="+settings.allsettings[3]+"sde2 bs=512 count=1024 of=/dev/block/sde","dd if="+settings.allsettings[3]+"boot2 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo2 of=/dev/block/by-name/dtbo","reboot"},true,false);
+
+     //                 }
+     //             }).start();
+     //            // showpross("正在切换到系统2，稍后重启！","切换状态");
+     //             }
+     //         if (Integer.valueOf(settings.allsettings[0])==1){
+     //             new Thread(new Runnable() {
+     //                 @Override
+     //                 public void run() {
+     //                     r=setCommand.execCommand(new String[]{"su","dd if="+settings.allsettings[3]+"sys2 bs=512 count=1024 of=/dev/block/mmcblk0","dd if="+settings.allsettings[3]+"boot2 of=/dev/block/by-name/boot","dd if="+settings.allsettings[3]+"dtbo2 of=/dev/block/by-name/dtbo","reboot"},true,false);
+
+     //                 }
+     //             }).start();
+     //          //   showpross("正在切换到系统1，稍后重启！","切换状态");
+     //               }else if (Integer.valueOf(settings.allsettings[0])!=0&&Integer.valueOf(settings.allsettings[0])!=1){
+     //             meterro("切换到系统2失败！未知的存储类型！",1);
+     //         }
+     //          //切换系统2
+     //      }
+     //  });
+    //   adventage.setOnClickListener(new View.OnClickListener() {
+    //       @Override
+    //       public void onClick(View v) {
+    //           //高级工具
+    //         Intent i =new Intent(MainActivity.this,advence.class);
+    //         startActivity(i,ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+    //               }
+    //   });
+    //   backups.setOnClickListener(new View.OnClickListener() {
+    //       @Override
+    //       public void onClick(View v) {
+    //           showpross("少壮不搞事，老大徒伤悲！\n请稍后...","Backuping Files");
+    //           //备份
+    //           if (Integer.valueOf(settings.allsettings[0])==0){
+    //               new Thread(new Runnable() {
+    //                   @Override
+    //                   public void run() {
+    //                       r=setCommand.execCommand(new String[]{"dd if=/dev/block/sda bs=512 count=1024 of="+settings.allsettings[2]+"sda"+settings.allsettings[7],"dd if=/dev/block/sde bs=512 count=1024 of="+settings.allsettings[2]+"sde"+settings.allsettings[7],"dd if=/dev/block/by-name/boot of="+settings.allsettings[2]+"boot"+settings.allsettings[7],"dd if=/dev/block/by-name/dtbo of="+settings.allsettings[2]+"dtbo"+settings.allsettings[7]},true,false);
+    //                       h.sendEmptyMessage(06);
+    //                       h.sendEmptyMessage(07);
+    //                   }
+    //               }).start();
+    //                 }
+    //           //emmc
+    //           if (Integer.valueOf(settings.allsettings[0])==1){
+    //               new Thread(new Runnable() {
+    //                   @Override
+    //                   public void run() {
+    //                       r=setCommand.execCommand(new String[]{"dd if=/dev/block/mmcblk0 bs=512 count=1024 of="+settings.allsettings[2]+"sys"+settings.allsettings[7],"dd if=/dev/block/by-name/boot of="+settings.allsettings[2]+"boot"+settings.allsettings[7],"dd if=/dev/block/by-name/dtbo of="+settings.allsettings[2]+"dtbo"+settings.allsettings[7]},true,false);
+    //                       h.sendEmptyMessage(06);
+    //                       h.sendEmptyMessage(07);
+    //                   }
+    //               }).start();
+    //               }
+
+    //       }
+    //   });
+    //   exitwin.setOnClickListener(new View.OnClickListener(){
+    //       @Override
+    //       public void onClick(View v) {
+    //           System.exit(0);
+    //       }
+    //   });
+       // fab.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //     public void onClick(View view) {
+       //         Intent i =new Intent(MainActivity.this,start.class);
+       //         startActivity(i,  ActivityOptions.makeSceneTransitionAnimation(MainActivity.this).toBundle());
+       //         //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+       //           //      .setAction("Action", null).show();
+       //     }
+       // });
         pd=new ProgressDialog(MainActivity.this);
         pd.setTitle("处理进度");
         pd.setCancelable(false);
         pd.setMessage("正在处理中");
-        pd.setIcon(R.drawable.win10);
+        pd.setIcon(R.drawable.iconnull);
         noroot=new AlertDialog.Builder(MainActivity.this);
         noroot.setTitle("ERRO！！！");
-        noroot.setIcon(R.drawable.win10);
+        noroot.setIcon(R.drawable.iconnull);
         noroot.setMessage("对不起您的设备没有ROOT或此软件未获取到root!!!一切功能都将报废！感谢您的支持：获取root方式请百度 机型+如何root：或者到到酷安@高纯铁寻求帮助。");
         noroot.setCancelable(false);
         noroot.setPositiveButton("退出", new DialogInterface.OnClickListener() {
@@ -403,8 +458,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //setupfile
-        setmsg = new String[20];
         showpross("海内存知己，天涯若比邻\n请稍等...","ATMS正在启动");
+        testsetupfile();
+
+    }
+
+
+
+    public void testsetupfile(){
         //test the setup file
 
         //检测
@@ -413,26 +474,31 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //设置存储类型
-           try {
-               File fff = new File("/sdcard/highsys/setup.txt");
-               FileReader fffr = null;
-               fffr = new FileReader(fff);
-               BufferedReader bbr = new BufferedReader(fffr);
-               settings.allsettings[0]=bbr.readLine();
-               if (settings.allsettings[0]==null){
-                   fffr.close();
-                   bbr.close();
-                   throw new Exception("None disk type!");
-               }else if (settings.allsettings[0]!=null){
-                   h.sendEmptyMessage(04);
-               }
+                try {
+                    //扫描persist
+                    setCommand.execCommand(new String[]{"mkdir /mnt/persist_atms","mount -t ext4 /dev/block/bootdevice/by-name/persist /mnt/persist_atms"},true,true);
+                    setCommand.resultCom r = setCommand.execCommand( new String[]{"[ -e /mnt/persist_atms/atms_core.conf ] && echo 1 || echo 0"},true,true);
+                    Log.d(TAG,setCommand.execCommand( new String[]{"[ -e /mnt/persist_atms/atms_core.conf ] && echo 1 || echo 0"},true,true).ok);
+                    if (r.ok.equals("1")){
+                        String SETUPFILEPOSSI=setCommand.execCommand(new String[]{"cat /mnt/persist_atms/atms_core.conf"},true,true).ok.split("\n")[0];
+                        setmsg=setCommand.execCommand( new String[]{"cat "+SETUPFILEPOSSI},true,true).ok.split("#");
+                        Log.d(TAG,"test 0"+setmsg[0]);
+                        //配置向上转型接口
 
-           } catch (Exception e) {
-               e.printStackTrace();
-               erromse=e.getMessage();
-           }
+                        //
+                    }else if (r.ok.equals("0")){
+                     //hello
+                        Log.d(TAG,"hello");
+                        h.sendEmptyMessage(01);
+                        Log.d(TAG,"hello_w");
+                    }
 
-           /////////////////////////////////////////////////////
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    erromse=e.getMessage();
+                }
+
+                /////////////////////////////////////////////////////
                 boolean rootpe=isrootper.isroot();
                 if (rootpe){
                     //root
@@ -444,6 +510,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (rrrrr.ok.equals("1")){
                         thebeginning();
+                        Log.d(TAG,"ROOT OK");
                     }
 
                 }else {
@@ -453,41 +520,26 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
 
-
     }
     public void thebeginning(){
         //正常入口处1
         new Thread(new Runnable() {
             @Override
             public void run() {
-                File f = new File("/sdcard/highsys/setup.txt");
-                if (f.exists()) {
-                    try {
-                        FileReader fr = new FileReader(f);
-                        BufferedReader br = new BufferedReader(fr);
-                        //测试配置文件
-                        setmsg[0] = br.readLine();
-                        if (setmsg[0] == null) {
-                            h.sendEmptyMessage(01);
-                            fr.close();
-                            br.close();
-                        }
                         if (setmsg[0] != null) {
                             h.sendEmptyMessage(00);
-                            int i=1;
-                            while ((setmsg[i] = br.readLine())!=null){
-                                i++;
-
-                            }
-                            settings.allsettings[0]=setmsg[0];
-                            settings.allsettings[1]=setmsg[1];
-                            settings.allsettings[2]=setmsg[2];
-                            settings.allsettings[3]=setmsg[3];
-                            settings.allsettings[4]=setmsg[4];
-                            settings.allsettings[5]=setmsg[5];
-                            settings.allsettings[6]=setmsg[6];
-                            settings.allsettings[7]=setmsg[7];
-                            settings.allsettings[8]=setmsg[8];
+                         settings.allsettings[0]=setmsg[0];
+                         Log.d(TAG,"setmsg");
+                         settings.allsettings[1]=setmsg[1];
+                            Log.d(TAG,"setmsg1");
+                         settings.allsettings[2]=setmsg[2];
+                         settings.allsettings[3]=setmsg[3];
+                         settings.allsettings[4]=setmsg[4];
+                         settings.allsettings[5]=setmsg[5];
+                         settings.allsettings[6]=setmsg[6];
+                         settings.allsettings[7]=setmsg[7];
+                         Log.d(TAG,setmsg[7]);
+                         settings.allsettings[8]=setmsg[8];
                             //音乐
                             if (settings.allsettings[1].equals("0")){
                                 hmedia.sendEmptyMessage(1);
@@ -497,20 +549,26 @@ public class MainActivity extends AppCompatActivity {
                                 tools.onshell(settings.allsettings[5]);
                             }
                             h.sendEmptyMessage(04);
-                            fr.close();
-                            br.close();
                         }
-
-                    } catch (Exception e) {
-                        erromse=e.getMessage();
-                        h.sendEmptyMessage(-2);
-                    }
-
-                } else if (!f.exists()){
-                    h.sendEmptyMessage(01);
-                }
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                loadsystemSelecter();
+                            }
+                        });
             }
         }).start();
+    }
+    //load systems
+    public void loadsystemSelecter(){
+        replaceFragment(new SysSelecter());
+    }
+    public void replaceFragment(Fragment frag) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ts = fm.beginTransaction();
+        ts.replace(R.id.allview_con, frag);
+        ts.commit();
+
     }
     public void initfile() {
         //安装包地址
@@ -519,11 +577,12 @@ public class MainActivity extends AppCompatActivity {
         //配置aik
 
         //
+        setCommand.execCommand( new String[]{"echo \"/sdcard/highsys/setup.txt\" > /mnt/persist_atms/atms_core.conf"},true,true);
         File f = new File("/sdcard/highsys/setup.txt");
         if (f.exists()) {
             try {
                 PrintWriter pw=new PrintWriter(f);
-                pw.write("0\n0\n/sdcard/highsys/backups/\n/sdcard/highsys/systems/\n0\nadmin\n1\nnull");
+                pw.write("0#\n0#\n/sdcard/highsys/backups/#\n/sdcard/highsys/systems/#\n0#\nadmin#\n1#\nunknow#\nunknow");
                 //测试配置文件
                 pw.close();
 
@@ -543,12 +602,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void initview(){
-        restoredir.setText("从"+settings.allsettings[3]+"恢复文件");
         if(Integer.valueOf(settings.allsettings[0])==0){
-            sdtype.setText("UFS");
+           // sdtype.setText("UFS");
         }
         if(Integer.valueOf(settings.allsettings[0])==1){
-            sdtype.setText("EMMC");
+        //    sdtype.setText("EMMC");
         }else if (Integer.valueOf(settings.allsettings[0])!=0 &&Integer.valueOf(settings.allsettings[0])!=1){
            meterro("错误！从配置文件读取存储类型错误！",0);
         }
@@ -580,7 +638,7 @@ public class MainActivity extends AppCompatActivity {
                     AlertDialog.Builder nosdcard = new AlertDialog.Builder(MainActivity.this);
                     nosdcard.setCancelable(false);
                     nosdcard.setTitle("错误了小朋友");
-                    nosdcard.setIcon(R.drawable.win10);
+                    nosdcard.setIcon(R.drawable.iconnull);
                     nosdcard.setMessage("不给存储怎么玩啦，重新给一下存储再打开啦！管理员QQ2041469901");
                     nosdcard.setPositiveButton("我玩不起", new DialogInterface.OnClickListener() {
                         @Override
@@ -619,11 +677,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onRestart() {
+
         super.onRestart();
-        sys1.startAnimation(translateAnimation);
-        sys2.startAnimation(translateAnimation);
-        adventage.startAnimation(translateAnimation);
-        backups.startAnimation(translateAnimation);
+        draw_view.closeDrawers();
+
         if (fingers.fingerresults==0){
             thebeginning();
         }
@@ -635,10 +692,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        sys1.startAnimation(translateAnimation);
-        sys2.startAnimation(translateAnimation);
-        adventage.startAnimation(translateAnimation);
-        backups.startAnimation(translateAnimation);
+        //draw_view.closeDrawers();
+
         if (fingers.fingerresults==0){
             thebeginning();
         }
@@ -650,10 +705,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        sys1.startAnimation(translateAnimation);
-        sys2.startAnimation(translateAnimation);
-        adventage.startAnimation(translateAnimation);
-        backups.startAnimation(translateAnimation);
+        //draw_view.closeDrawers();
+
         if (fingers.fingerresults==0){
             thebeginning();
         }

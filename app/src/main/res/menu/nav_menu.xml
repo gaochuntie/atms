@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/choose"
+            android:icon="@drawable/iconnull"
+            android:title="CHOOSE"/>
+        <item
+            android:id="@+id/install"
+            android:icon="@drawable/iconnull"
+            android:title="INSTALL"/>
+        <item
+            android:id="@+id/help"
+            android:icon="@drawable/iconnull"
+            android:title="HELP"/>
+        <item
+            android:id="@+id/supportme"
+            android:icon="@drawable/iconnull"
+            android:title="SUPPORT"/>
+        <item
+            android:id="@+id/settings"
+            android:icon="@drawable/iconnull"
+            android:title="SETTINGS"/>
+        <item
+            android:id="@+id/exitwin"
+            android:icon="@drawable/iconnull"
+            android:title="EXIT"/>
+        <item
+            android:id="@+id/backups"
+            android:icon="@drawable/iconnull"
+            android:title="BACKUP"/>
+        <item
+            android:id="@+id/test"
+            android:icon="@drawable/iconnull"
+            android:title="TEST"/>
+        <item
+            android:id="@+id/advence"
+            android:icon="@drawable/iconnull"
+            android:title="Advence"/>
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/iconnull"
+            android:title="About"/>
+    </group>
+</menu>
