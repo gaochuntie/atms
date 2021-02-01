@@ -1,4 +1,4 @@
-package com.highsys.systemchanger;
+package com.highsys.pages;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -22,6 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.highsys.atms_obj.settings;
+import com.highsys.systemchanger.R;
+import com.highsys.tool.setCommand;
 
 
 public class fingers extends AppCompatActivity {
@@ -87,6 +89,7 @@ public class fingers extends AppCompatActivity {
         if (actionbar != null) {
             actionbar.hide();
         }
+        processdia.setProcess(processdia.PROCESS_FINISH);
         fingertimes=4;
         fingerresult = findViewById(R.id.fingersresult);
         fingeruser = findViewById(R.id.fingeruser);
@@ -130,10 +133,17 @@ public class fingers extends AppCompatActivity {
     }
 
         public void fingercreat(){
+            Process process=null;
+            try {
+                Runtime.getRuntime().exec("su");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         try {
+
              r=setCommand.execCommand(new String[]{"[ -e /data/highsyslock ] && echo 0 || echo 1"},true,true);
             String resultexec=r.ok;
-            r=setCommand.execCommand(new String[]{"touch /data/highsyslock"},true,true);
+            r=setCommand.execCommand(new String[]{"touch /data/highsyslock"},true,false,process);
         }catch (Exception e ){
             meterro(e.getMessage(),0);
         }

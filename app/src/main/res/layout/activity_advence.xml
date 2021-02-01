@@ -9,225 +9,160 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <LinearLayout
-            android:layout_gravity="center"
             android:layout_width="match_parent"
-            android:orientation="vertical"
             android:layout_height="match_parent"
-            android:background="@drawable/windowsshape">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="50dp">
-            </LinearLayout>
+            android:layout_gravity="center"
+            android:background="#00FF0000"
+            android:orientation="vertical">
+
             <TextView
-                android:textSize="13dp"
                 android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp"
                 android:text="IMG文件工作目录："
-                android:layout_height="25dp"/>
+                android:textSize="13dp" />
+
             <TextView
-                android:id="@+id/workpath"
-                android:text="未知"
-                android:textSize="13dp"
+                android:id="@+id/imgworkspace"
                 android:layout_width="wrap_content"
-                android:layout_height="20dp"/>
+                android:layout_height="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:text="未知"
+                android:textSize="13dp" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="50dp"
                 android:gravity="center"
                 android:text="请将您要处理的img放到您的img工作目录里面，也就是配置文件第五行的文件夹，然后点击解压就能在此目录中中找到ramdisk，按照您的需要编辑以后点击生成就会在此目录下面生成新的img文件image-new.img，然后清理，然后就可以进行测试了,捐赠项目，本人不对使用本软件产生的一切后果负责！请斟酌操作！！！！"
-                android:textColor="#A8A8A8"
-                android:textSize="10dp"/>
+                android:textColor="#000000"
+                android:textSize="10dp" />
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="270dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="left"
                 android:orientation="vertical">
-                <TextView
-                    android:gravity="center"
-                    android:textSize="10dp"
-                    android:layout_width="match_parent"
-                    android:text=""
-                    android:textColor="#FF00"
-                    android:layout_height="15dp"/>
 
                 <Button
-                    android:textSize="10dp"
-                    android:text="解压img镜像"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/unpack"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:textColor="#40DA08"
-                    android:text=""
-                    android:textSize="6dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="left"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="解压img镜像"
+                    android:textSize="10dp" />
 
                 <Button
-                    android:textSize="10dp"
-                    android:text="生成img镜像"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/repack"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:textColor="#40DA08"
-                    android:textSize="6dp"
-                    android:text=""
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_toRightOf="@id/unpack"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="生成img镜像"
+                    android:textSize="10dp" />
+
                 <Button
-                    android:textSize="10dp"
-                    android:text="清除旧的解压文件"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/cleanup"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:textColor="#40DA08"
-                    android:textSize="6dp"
-                    android:text=""
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/unpack"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="清理"
+                    android:textSize="10dp" />
 
                 <Button
-                    android:textSize="10dp"
-                    android:text="立即刷入刚刚生成的rec"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/flashrec"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:textColor="#40DA08"
-                    android:textSize="6dp"
-                    android:text=""
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_toRightOf="@id/cleanup"
+                    android:layout_below="@id/repack"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="立即刷入刚刚生成的rec"
+                    android:textSize="10dp" />
 
                 <Button
-                    android:text="全自动添加rec补丁"
-                    android:textSize="10dp"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/allrun"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:textColor="#40DA08"
-                    android:text=""
-                    android:layout_width="match_parent"
-                    android:textSize="6dp"
-                    android:layout_height="10dp"/>
-                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/cleanup"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="全自动添加rec补丁"
+                    android:textSize="10dp" />
 
-                    android:textSize="10dp"
-                    android:text="虚拟sd卡制作"
+                <Button
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/virtualsd"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_toRightOf="@id/allrun"
+                    android:layout_below="@id/flashrec"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="虚拟sd卡制作"
+                    android:textSize="10dp" />
 
-                    android:textSize="10dp"
-                    android:text="一键关闭AVB2.0"
+                <Button
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/noavb2"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/allrun"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="一键关闭AVB2.0"
+                    android:textSize="10dp" />
+
                 <TextView
+                    android:layout_margin="10dp"
+                    android:id="@+id/t1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/noavb2"
                     android:text="往下翻啦！请勿管理当前系统！系统顺序无规律，请看准，build.prop有每个系统的信息！sar机器在/mnt/system*/system/build.prop,其他在/mnt/system*/build.prop，请一定区分清楚sar，动态分区不知道支持不"
-                    android:textSize="7dp"
-                    android:textColor="#939393"
-                    android:gravity="center"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"/>
-                <Button
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
 
-                    android:textSize="10dp"
-                    android:text="管理系统1"
-                    android:id="@+id/contsys1"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
                 <Button
-
-                    android:textSize="10dp"
-                    android:text="管理系统2"
-                    android:id="@+id/contsys2"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-                <Button
-
-                    android:textSize="10dp"
-                    android:text="管理系统3"
-                    android:id="@+id/contsys3"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-                <Button
-
-                    android:textSize="10dp"
-                    android:text="管理系统4"
-                    android:id="@+id/contsys4"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-                <Button
-
-                    android:textSize="10dp"
-                    android:text="安装双系统(Linux)"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/installsys"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/t1"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="安装双系统(Linux)"
+                    android:textSize="10dp" />
+
+
                 <Button
-
-                    android:textSize="10dp"
-                    android:text="安装双系统(Android)"
+                    android:gravity="bottom|center"
+                    android:layout_margin="10dp"
                     android:id="@+id/insmobile"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/buttonshape"
-                    android:layout_gravity="center"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp"/>
-            </LinearLayout>
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_below="@id/t1"
+                    android:layout_toRightOf="@id/installsys"
+                    android:background="@drawable/action_button_foreground"
+                    android:text="安装双系统(Android)"
+                    android:textSize="10dp" />
+            </RelativeLayout>
         </LinearLayout>
-
 
 
     </LinearLayout>

@@ -23,8 +23,17 @@
             android:layout_marginBottom="7dp"
             android:layout_marginHorizontal="20dp"
             android:layout_height="wrap_content"
-            android:text="请立即关闭avb2.0|您即将进行双系统安装操作，请确认您知道这意味着什么，请立即做好一切数据备份，并且root您的设备.我们将会在稍后替换您现有的recovery，完成双系统安装后，您可以自行恢复到原来的recovery,并且您必须在同意《欢迎》界面中的声明后才可继续\n更多机器请等待更新，催更 >QQ2094858273"
+            android:text="双系统安装提示 : \n请立即关闭avb2.0|您即将进行双系统安装操作，请确认您知道这意味着什么，请立即做好一切数据备份，并且root您的设备.我们将会在稍后替换您现有的recovery，完成双系统安装后，您可以自行恢复到原来的recovery,并且您必须在同意《欢迎》界面中的声明后才可继续\n更多机器请等待更新，催更 >QQ2094858273"
             android:textColor="#000000"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="7dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_height="wrap_content"
+            android:text="Recovery 市场约束：　\n首先，您必须关闭avb2.0，并且同意欢迎界面的声明方可继续，这里所有的recovery除双系统版本外均来自第三方，请斟酌刷入"
+            android:textColor="#000000"/>
+
     </LinearLayout>
 
 

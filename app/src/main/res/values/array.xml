@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string-array name="rec_device">
+        <item>All</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+        <item>Redmi Note 7 pro</item>
+        <item>Xiaomi mix2</item>
+        <item>Xiaomi mix2s</item>
+        <item>Redmi Note 7</item>
+        <item>Redmi Note 8</item>
+        <item>Xiaomi 8</item>
+    </string-array>
+    <string-array name="rec_device_size">
+        <item>All</item>
+        <item>512g</item>
+        <item>256g</item>
+        <item>128g</item>
+        <item>64g</item>
+        <item>32g</item>
+        <item>16g</item>
+        <item>8g</item>
+        <item>4g</item>
+    </string-array>
+</resources>

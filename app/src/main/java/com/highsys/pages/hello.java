@@ -1,4 +1,4 @@
-package com.highsys.systemchanger;
+package com.highsys.pages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.highsys.atms_obj.settings;
+import com.highsys.systemchanger.MainActivity;
+import com.highsys.systemchanger.R;
+import com.highsys.tool.setCommand;
+import com.highsys.tool.tools;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -23,7 +27,6 @@ public class hello extends AppCompatActivity {
     String messages;
     Button go;
     EditText uname;
-    EditText userid;
     Button ty0;
     Button ty1;
     Button help;
@@ -64,7 +67,7 @@ public class hello extends AppCompatActivity {
                     });
                     tools.preaik(hello.this);
                 }catch (Exception e ){
-                    meterro(e.getMessage(),allerros.BACKPRESSENABLE);
+                    meterro(e.getMessage(), allerros.BACKPRESSENABLE);
                 }
 
             }
@@ -73,7 +76,6 @@ public class hello extends AppCompatActivity {
         wel=findViewById(R.id.welcome);
         go=findViewById(R.id.hellogo);
        uname=findViewById(R.id.username);
-       userid=findViewById(R.id.usid);
       ty0=findViewById(R.id.type0);
       ty1=findViewById(R.id.type1);
        help=findViewById(R.id.help);
@@ -99,7 +101,7 @@ public class hello extends AppCompatActivity {
         help.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               Intent i =new Intent(hello.this,thehelps.class);
+               Intent i =new Intent(hello.this, thehelps.class);
                startActivity(i);
            }
        });
@@ -108,9 +110,9 @@ public class hello extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 settings.allsettings[6]=String.valueOf(uname.getText());
-                settings.allsettings[7]=String.valueOf(userid.getText());
+                settings.allsettings[7]="System order moves to /system/atms_system_order.conf";
                 initfile();
-                Intent i =new Intent(hello.this,MainActivity.class);
+                Intent i =new Intent(hello.this, MainActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -128,8 +130,8 @@ public class hello extends AppCompatActivity {
                 sets[4]="/sdcard/highsys/imgwork/";
                 sets[5]="0";
                 sets[6]=settings.allsettings[6];
-                sets[7]=settings.allsettings[7];
-                sets[8]="unknown";
+                sets[7]="System order moved to /system/atms_system_order.conf";
+                sets[8]="/sdcard/highsys/setup.txt";
                 sets[9]="unknown";
                 try{
                     int isnull=0;

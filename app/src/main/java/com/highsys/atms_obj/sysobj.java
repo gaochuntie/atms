@@ -1,4 +1,4 @@
-package com.highsys.pages;
+package com.highsys.atms_obj;
 
 public class sysobj {
     private String dtbo_path=null;

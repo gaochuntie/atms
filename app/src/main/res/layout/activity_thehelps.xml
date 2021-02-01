@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/windowsshape"
     android:orientation="vertical"
-    tools:context=".thehelps">
+    tools:context="com.highsys.pages.thehelps">
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         app:cardCornerRadius="8dp"
@@ -37,17 +37,26 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"/>
     <TextView
+        android:id="@+id/message"
         android:layout_gravity="center"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:textColor="#000000"
         android:textSize="12dp"
-        android:text="  对于首次使用的用户，您需要填写用户名也就是昵称，请勿使用中文，当然您也可以尝试，若软件崩溃删除/sdcard/highsys/setup.txt重新打开软件即可，请一定全部填写空指针会崩溃！删除软件配置/sdcard/highsys/setup.txt可以解决大部分崩溃，第二个框请填写您当前是系统几，此空必填，支持1/2/3/4.然后第三个是选择您的芯片类型若您不知道可不选，首次打开软件请转到设置设定您的配置，如果不设置，默认在/sdcard/highsys/backups里面是系统备份文件，/sdcard/highsys/systems/里面是切换所需的文件,设置目录时请加/结尾，如何切换请到微博查找视屏教程，也可酷安搜索@高纯铁留言\n\n\n\n\n\n\n视频教程请微博搜索@高纯铁-HighSys，因为酷安无法上传\n\n\n"/>
-    <Button
+        android:text="我不想写教程，交给各位了\nI don't want to make a help passage,a work for you\nヽ(✿ﾟ▽ﾟ)ノ"/>
+        <Button
         android:layout_width="100dp"
         android:layout_height="40dp"
         android:layout_gravity="right"
         android:text="返回"
         android:id="@+id/backto"
+        android:background="@drawable/buttonshape"/>
+    <Button
+        android:layout_marginTop="20dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:text="打开我的微博"
+        android:id="@+id/jumptoweibo"
         android:background="@drawable/buttonshape"/>
 </LinearLayout>

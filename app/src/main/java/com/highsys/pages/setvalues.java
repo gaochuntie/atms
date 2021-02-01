@@ -1,8 +1,10 @@
-package com.highsys.systemchanger;
+package com.highsys.pages;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.ActivityOptions;
 import android.app.AlertDialog;
@@ -12,8 +14,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.transition.Slide;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -21,18 +26,25 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.highsys.atms_obj.settings;
+import com.highsys.systemchanger.MainActivity;
+import com.highsys.systemchanger.R;
+import com.highsys.tool.setCommand;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class setvalues extends AppCompatActivity {
+public class setvalues extends Fragment {
     AlertDialog.Builder meterr;
     String[] sets=new String[8];
     EditText btn1;
     EditText btn2;
+    public static setvalues setvalues_i;
     EditText btn3;
+    Button cancel_;
     EditText btn4;
+    EditText btn7;
+    EditText btn8;
     EditText btn5;
     Button fingers;
     public int isnull=0;
@@ -41,12 +53,13 @@ public class setvalues extends AppCompatActivity {
     String erro=null;
     int ifgo;
     com.kyleduo.switchbutton.SwitchButton switchButton;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
-        setContentView(R.layout.activity_setvalues);
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view=inflater.inflate(R.layout.activity_setvalues,container,false);
+        setvalues_i=this;
+        meterr=new AlertDialog.Builder(MainActivity.context);
         //handler
         h=new Handler(){
             @Override
@@ -56,10 +69,9 @@ public class setvalues extends AppCompatActivity {
                     meterro(erro);
                 }
                 if(msg.what==01){
-                    Toast.makeText(setvalues.this,"操作已执行",Toast.LENGTH_SHORT).show();
-                   // Toast.makeText(setvalues.this,settings.allsettings[0]+settings.allsettings[1]+settings.allsettings[2]+settings.allsettings[3]+settings.allsettings[4],Toast.LENGTH_SHORT).show();
-                    Intent i =new Intent(setvalues.this,MainActivity.class);
-                    startActivity(i, ActivityOptions.makeSceneTransitionAnimation(setvalues.this).toBundle());
+                    Toast.makeText(MainActivity.context,"操作已执行",Toast.LENGTH_SHORT).show();
+                    ((MainActivity)MainActivity.context).loadsystemSelecter();
+                    // Toast.makeText(setvalues.this,settings.allsettings[0]+settings.allsettings[1]+settings.allsettings[2]+settings.allsettings[3]+settings.allsettings[4],Toast.LENGTH_SHORT).show();
 
                 }
                 if (msg.what==-100){
@@ -69,21 +81,17 @@ public class setvalues extends AppCompatActivity {
             }
         };
         //
-        getWindow().setEnterTransition(new Slide().setDuration(500));
-        getWindow().setExitTransition(new Slide().setDuration(1000));
-        ActionBar actionbar = getSupportActionBar();
-        if(actionbar != null){
-            actionbar.hide();
-        }
-        //
-         btn1=findViewById(R.id.btn1);
-         btn2=findViewById(R.id.btn2);
-         btn3=findViewById(R.id.btn3);
-         btn4=findViewById(R.id.btn4);
-         btn5=findViewById(R.id.btn5);
-         btn6=findViewById(R.id.btn6);
+        cancel_=view.findViewById(R.id.cancle_);
+        btn1=view.findViewById(R.id.btn1);
+        btn2=view.findViewById(R.id.btn2);
+        btn3=view.findViewById(R.id.btn3);
+        btn4=view.findViewById(R.id.btn4);
+        btn5=view.findViewById(R.id.btn5);
+        btn6=view.findViewById(R.id.btn6);
+        btn7=view.findViewById(R.id.btn7);
+        btn8=view.findViewById(R.id.btn8);
         switchButton= (com.kyleduo.switchbutton.SwitchButton)
-                findViewById(R.id.fingers);
+                view.findViewById(R.id.fingers);
 
         switchButton.setChecked(true);//设置为真，即默认为真
         switchButton.isChecked();//被选中
@@ -92,26 +100,19 @@ public class setvalues extends AppCompatActivity {
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                com.highsys.systemchanger.fingers.fingermode=0;
-                Intent i =new Intent(setvalues.this,com.highsys.systemchanger.fingers.class);
-                startActivity(new Intent(setvalues.this,fingers.class));
-                overridePendingTransition(R.anim.botttom_in,R.anim.bottom_silent);
-               // Toast.makeText(setvalues.this,"jfioadsjf",Toast.LENGTH_SHORT).show();
+                com.highsys.pages.fingers.fingermode=0;
+                Intent i =new Intent(MainActivity.context, com.highsys.pages.fingers.class);
+                startActivity(i);
+                // Toast.makeText(setvalues.this,"jfioadsjf",Toast.LENGTH_SHORT).show();
             }
         });
-         Button exitwin=findViewById(R.id.exitwin);
-         exitwin.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Runtime runtime = Runtime.getRuntime();
-                 try {
-                     runtime.exec("input keyevent " + KeyEvent.KEYCODE_BACK);
-                 } catch (IOException e) {
-                     e.printStackTrace();
-                 }
-             }
-         });
-        Button ok=findViewById(R.id.ok);
+        cancel_.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)MainActivity.context).loadsystemSelecter();
+            }
+        });
+        Button ok=view.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,15 +123,19 @@ public class setvalues extends AppCompatActivity {
                     settings.allsettings[3]= String.valueOf(btn4.getText());
                     settings.allsettings[4]= String.valueOf(btn5.getText());
                     settings.allsettings[5]= String.valueOf(btn6.getText());
-                   // sets[6]=settings.username;
-                   // sets[7]=settings.userid;
+                    settings.allsettings[8]=String.valueOf(btn7.getText());
+                    final String sysorder=String.valueOf(btn8.getText());
+                    settings.allsettings[7]=sysorder;
+
+                    // sets[6]=settings.username;
+                    // sets[7]=settings.userid;
                     //开始写入配置文件
 
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try{
-                                 isnull=0;
+                                isnull=0;
                                 for (int i=0;i<6;i++){
                                     if (settings.allsettings[i]==null){
                                         isnull=-1;
@@ -141,15 +146,22 @@ public class setvalues extends AppCompatActivity {
                                     }
                                 }
                                 File f=new File("/sdcard/highsys/setup.txt");
-                                if (f.exists() & isnull!=-1){
+                                if ( isnull!=-1){
+                                    if (!f.exists()){
+                                        f.createNewFile();
+                                    }
                                     PrintWriter pw =new PrintWriter("/sdcard/highsys/setup.txt");
                                     int i =0;
-                                   while ( i < 20 & settings.allsettings[i]!=null){
-                                        pw.write(settings.allsettings[i]+"\n");
+                                    settings.allsettings[7]="System order moved to /system/atms_system_order.conf";
+                                    while ( i < 20 & settings.allsettings[i]!=null){
+                                        pw.write(settings.allsettings[i]+"#\n");
                                         i++;
                                     }
+                                    settings.allsettings[7]=sysorder;
                                     pw.flush();
                                     pw.close();
+                                    setCommand.execCommand(new String[]{"mv /sdcard/highsys/setup.txt "+settings.getSETUPFILE(),"echo "+settings.getSETUPFILE()+" > /mnt/persist_atms/atms_core.conf","echo "+sysorder+" >/system/atms_system_order.conf"},true,false);
+                                    Log.d("XX","mv /sdcard/highsys/setup.txt"+settings.getSETUPFILE()+"\n"+"echo "+settings.getSETUPFILE()+" /mnt/persist_atms/atms_core.conf");
                                     h.sendEmptyMessage(01);
                                 }else if (!f.exists()){
                                     erro="文件不存在！";
@@ -172,22 +184,21 @@ public class setvalues extends AppCompatActivity {
                 }
 
 
-               // Toast.makeText(setvalues.this,btn1.getText(),Toast.LENGTH_LONG).show();
+                // Toast.makeText(setvalues.this,btn1.getText(),Toast.LENGTH_LONG).show();
             }
         });
-        meterr=new AlertDialog.Builder(setvalues.this);
-        meterr.setCancelable(false);
-        meterr.setMessage("对不起发生了严重错误！请联系管理员QQ2041469901反馈！！！");
-        meterr.setTitle("ERRO！！！");
-        meterr.setPositiveButton("退出", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                System.exit(0);
-            }
-        });
-
+        btn1.setText(settings.getSDCARDTYPE());
+        btn2.setText("1");
+        btn3.setText(settings.getBACKUPSDIR());
+        btn4.setText(settings.getSYSTEMFILE());
+        btn5.setText(settings.getIMAGEWORKDIR());
+        btn6.setText(settings.getSHELLPATH());
+        btn7.setText(settings.getSETUPFILE());
+        btn8.setText(settings.getSYSORDER());
         checkfingers();
+        return view;
     }
+
     public void meterro(String err){
         meterr.setMessage("\n"+err);
         meterr.show();
@@ -202,21 +213,5 @@ public class setvalues extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        checkfingers();
-    }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        checkfingers();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        checkfingers();
-    }
 }

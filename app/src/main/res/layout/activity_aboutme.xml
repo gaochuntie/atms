@@ -6,7 +6,7 @@
     android:background="#00000000"
     android:orientation="horizontal"
     android:layout_height="match_parent"
-    tools:context=".aboutme">
+    tools:context="com.highsys.pages.aboutme">
     <LinearLayout
         android:layout_gravity="center"
         android:orientation="vertical"

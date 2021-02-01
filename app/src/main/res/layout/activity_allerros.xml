@@ -5,18 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00000000"
-    tools:context=".allerros">
+    tools:context="com.highsys.pages.allerros">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:background="#0B67B8"
         android:orientation="vertical"
         android:layout_gravity="center">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">   <TextView
@@ -36,25 +35,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
                 <TextView
+                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="    ERRO_CODE:  "
-                    android:textColor="#FFFFFF"/>
-                <TextView
-                    android:id="@+id/erromsg"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="UNKNOW"
+                    android:text="ERRO_CODE:  "
                     android:textColor="#FFFFFF"/>
 
             </LinearLayout>
-
+            <TextView
+                android:layout_marginVertical="5dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/erromsg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="UNKNOW"
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="20dp">
@@ -70,6 +70,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <LinearLayout
+                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"

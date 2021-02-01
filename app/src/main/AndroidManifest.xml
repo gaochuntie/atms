@@ -9,53 +9,50 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
-        android:networkSecurityConfig="@xml/network_security_config"
         android:name=".MyApplication"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@drawable/icon"
         android:label="ATMS"
+        android:exported="false"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".install_mobile"></activity>
+        <activity android:name="atms_pro.activities.ui.atmsProMain"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name="atms_pro.activities.ui.AtmsProHome" />
+        <activity android:name="com.highsys.pages.install_mobile" />
         <activity
-            android:name=".fingers"
+            android:name="com.highsys.pages.fingers"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".installsystems"
+            android:name="com.highsys.pages.installsystems"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".allerros"
+            android:name="com.highsys.pages.allerros"
             android:theme="@style/MyDialogStyleBottom" />
-        <activity android:name=".virtualsdcard" />
+        <activity android:name="com.highsys.pages.virtualsdcard" />
         <activity
-            android:name=".supportme"
-            android:theme="@style/MyDialogStyleBottom" />
-        <activity
-            android:name=".aboutme"
+            android:name="com.highsys.pages.supportme"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".advence"
-            android:theme="@style/MyDialogStyleBottom" />
-        <activity android:name=".thehelps" />
-        <activity
-            android:name=".processdia"
+            android:name="com.highsys.pages.aboutme"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".setvalues"
+            android:name="com.highsys.pages.thehelps"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name="com.highsys.pages.processdia"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".power"
+            android:name="com.highsys.pages.power"
             android:launchMode="standard"
             android:theme="@style/MyDialogStyleBottom" />
         <activity
-            android:name=".start"
-            android:launchMode="standard"
-            android:theme="@style/MyDialogStyleBottom" />
-        <activity
-            android:name=".hello"
+            android:name="com.highsys.pages.hello"
             android:launchMode="standard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -68,10 +65,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service
             android:name=".DownloadService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     </application>
 
 </manifest>

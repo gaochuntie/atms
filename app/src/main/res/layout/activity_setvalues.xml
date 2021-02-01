@@ -1,258 +1,277 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="#0000"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:layout_height="570dp">
+    android:background="#0000"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"/>
 
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_width="300dp"
-            android:orientation="vertical"
-            android:layout_height="800dp"
-            android:background="@drawable/windowsshape">
-            <androidx.cardview.widget.CardView
-            android:layout_marginLeft="15dp"
-                android:layout_marginRight="6dp"
-                android:layout_width="match_parent"
-                app:cardCornerRadius="8dp"
-                android:elevation="5dp"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="30dp">
-                <Button
-                    android:text="返回"
-                    android:id="@+id/exitwin"
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="right"
-                    android:background="#0000"/>
-            </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            android:background="#00000000"
+            android:orientation="vertical">
 
             <TextView
-                android:gravity="center"
-                android:textSize="9dp"
-                android:textColor="#8A8383"
-                android:text="\n如果不全部填写可能会导致软件直接崩溃|删除配置文件即可"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"/>
-            <androidx.cardview.widget.CardView
+                android:layout_height="30dp"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginVertical="20dp"
+                android:gravity="left"
+                android:text="\n如果不全部填写可能会导致软件直接崩溃|删除配置文件即可"
+                android:textColor="#000000"
+                android:textSize="9dp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:layout_width="match_parent"
-                app:cardCornerRadius="8dp"
-                android:elevation="5dp"
-                android:layout_height="wrap_content">
+                android:background="#00000000">
+
                 <LinearLayout
                     android:layout_width="270dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_gravity="left"
                     android:orientation="vertical">
+
                     <TextView
-                        android:gravity="center"
-                        android:textSize="10dp"
                         android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:gravity="left"
                         android:text="请一定全部填写！重启软件生效！不知道的写0"
-                        android:textColor="#FF8A8383"
-                        android:layout_height="30dp"/>
+                        android:textColor="#000000"
+                        android:textSize="10dp" />
 
                     <EditText
-                        android:textSize="10dp"
-                        android:hint="\t\t存储类型0是ufs 1是emmc"
                         android:id="@+id/btn1"
                         android:layout_width="260dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/buttonshape"
-                        android:layout_gravity="center"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="\t\t存储类型0是ufs 1是emmc"
+                        android:textSize="15dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:textColor="#00000000"
-                        android:text="音乐开关"
-                        android:textSize="6dp"
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="音乐开关"
+                        android:textColor="#00000000"
+                        android:textSize="6dp" />
 
                     <EditText
-                        android:textSize="10dp"
-                        android:hint="\t\t0表示播放1表示不播放"
                         android:id="@+id/btn2"
                         android:layout_width="260dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/buttonshape"
-                        android:layout_gravity="center"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="\t\t0表示播放1表示不播放"
+                        android:textSize="15dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:textColor="#00000000"
-                        android:textSize="6dp"
-                        android:text="备份文件到此路径"
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="备份文件到此路径"
+                        android:textColor="#00000000"
+                        android:textSize="6dp" />
+
                     <EditText
-                        android:textSize="10dp"
-                        android:hint="\t\t填写备份文件全路径，支持分区"
                         android:id="@+id/btn3"
                         android:layout_width="260dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/buttonshape"
-                        android:layout_gravity="center"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="\t\t填写备份文件全路径，支持分区"
+                        android:textSize="15dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:textColor="#00000000"
-                        android:textSize="6dp"
-                        android:text="从这里恢复文件"
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="从这里恢复文件"
+                        android:textColor="#00000000"
+                        android:textSize="6dp" />
 
                     <EditText
-                        android:textSize="10dp"
-                        android:hint="\t\t填写恢复文件全路径，支持分区"
                         android:id="@+id/btn4"
                         android:layout_width="260dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/buttonshape"
-                        android:layout_gravity="center"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="\t\t填写恢复文件全路径，支持分区"
+                        android:textSize="15dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:textColor="#00000000"
-                        android:textSize="6dp"
-                        android:text="img文件工作目录"
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="img文件工作目录"
+                        android:textColor="#00000000"
+                        android:textSize="6dp" />
 
                     <EditText
-                        android:textSize="10dp"
-                        android:hint="\t\tIMG文件处理目录"
                         android:id="@+id/btn5"
                         android:layout_width="260dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/buttonshape"
-                        android:layout_gravity="center"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="\t\tIMG文件处理目录"
+                        android:textSize="15dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:textColor="#00000000"
-                        android:text="每次启动软件时执行的shell命令"
                         android:layout_width="match_parent"
-                        android:textSize="6dp"
-                        android:layout_height="10dp"/>
+                        android:layout_height="10dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="每次启动软件时执行的shell命令"
+                        android:textColor="#00000000"
+                        android:textSize="6dp" />
+
                     <EditText
-                        android:textSize="10dp"
-                        android:hint="\t\t直接写命令无需注明!#/system/bin/bash"
                         android:id="@+id/btn6"
                         android:layout_width="260dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/buttonshape"
-                        android:layout_gravity="center"/>
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="　启动执行器全路径"
+                        android:textSize="13dp" />
+
                     <TextView
                         android:layout_width="match_parent"
-                        android:layout_height="10dp"/>
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_height="4dp"
-                        android:background="#255D5454"/>
+                        android:layout_height="10dp" />
+
+                    <EditText
+                        android:id="@+id/btn7"
+                        android:layout_width="260dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="　配置文件地址"
+                        android:textSize="13dp" />
+
                     <TextView
-                        android:layout_marginLeft="6dp"
-                        android:textSize="10dp"
-                        android:text="基础设置到此结束\n向下滑动获取更多"
-                        android:textColor="#838383"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"/>
+                        android:layout_height="10dp" />
+
+                    <EditText
+                        android:id="@+id/btn8"
+                        android:layout_width="260dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="center"
+                        style="@style/EditTextStyle"
+                        android:hint="　所在系统标号"
+                        android:textSize="13dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp" />
+
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                       android:layout_margin="8dp"
-                        app:cardCornerRadius="4dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
                         android:elevation="5dp"
-                        android:layout_height="wrap_content">
+                        app:cardCornerRadius="4dp">
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
                             <Button
                                 android:id="@+id/ok"
-                                android:text="完成"
                                 android:layout_width="100dp"
-                                android:layout_gravity="left"
                                 android:layout_height="50dp"
-                                android:background="#00000000"/>
+                                android:layout_gravity="left"
+                                android:background="#00000000"
+                                android:text="完成" />
+
                             <Button
-                                android:layout_marginLeft="5dp"
-                                android:id="@+id/cancle1"
-                                android:text="取消"
+                                android:id="@+id/cancle_"
                                 android:layout_width="100dp"
-                                android:layout_gravity="left"
                                 android:layout_height="50dp"
-                                android:background="#00000000"/>
+                                android:layout_gravity="left"
+                                android:layout_marginLeft="5dp"
+                                android:background="#00000000"
+                                android:text="取消" />
                         </LinearLayout>
 
                     </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginLeft="6dp"
+                        android:text="基础设置到此结束\n向下滑动获取更多"
+                        android:textColor="#838383"
+                        android:textSize="10dp" />
 
                     <LinearLayout
                         android:layout_width="270dp"
                         android:layout_height="270dp"
                         android:orientation="vertical">
+
                         <androidx.cardview.widget.CardView
-                            android:layout_margin="8dp"
-                            app:cardCornerRadius="4dp"
-                            android:elevation="5dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:elevation="5dp"
+                            app:cardCornerRadius="4dp">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="50dp"
-                                android:orientation="horizontal"
-                                android:background="#00FFFF00">
+                                android:background="#00FFFF00"
+                                android:orientation="horizontal">
+
                                 <TextView
                                     android:layout_width="0dp"
-                                    android:textColor="#072302"
-                                    android:text="指纹验证"
-                                    android:gravity="center"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    android:background="#00000000"/>
+                                    android:background="#00000000"
+                                    android:gravity="center"
+                                    android:text="指纹验证"
+                                    android:textColor="#072302" />
 
                                 <com.kyleduo.switchbutton.SwitchButton
                                     android:id="@+id/fingers"
-                                    android:textColor="#434141"
+                                    style="@style/SwitchButtonStyle"
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
                                     android:layout_weight="1"
-                                    style="@style/SwitchButtonStyle"
-                                    app:kswTintColor="#16A560"/>
+                                    android:textColor="#434141"
+                                    app:kswTintColor="#16A560" />
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="5dp"/>
+                            android:layout_height="5dp" />
+
                         <LinearLayout
-                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="80dp"
-                            android:background="#00FFFF00">
+                            android:background="#00FFFF00"
+                            android:orientation="horizontal">
 
                         </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </FrameLayout>
 
         </LinearLayout>
 
 
-
     </LinearLayout>
-
 
 
 </ScrollView>

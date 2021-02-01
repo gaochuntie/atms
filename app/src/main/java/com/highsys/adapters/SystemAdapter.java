@@ -1,8 +1,9 @@
-package com.highsys.pages;
+package com.highsys.adapters;
 
-import com.highsys.systemchanger.*;
-import android.content.Intent;
-import android.transition.Transition;
+import com.highsys.atms_obj.settings;
+import com.highsys.atms_obj.sysobj;
+import com.highsys.pages.processdia;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,8 +20,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.highsys.systemchanger.MainActivity;
 import com.highsys.systemchanger.MyApplication;
 import com.highsys.systemchanger.R;
-
-import org.apache.tools.ant.Main;
+import com.highsys.tool.setCommand;
 
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.ViewHolder
                 //切换
                 changesys(d);
                 //
-                processdia.showPrecessWindows(MainActivity.context,"Selecter","正在切换到系统"+d.getID(),0);
+                processdia.showPrecessWindows(MainActivity.context,"Selecter","正在切换到系统"+d.getID(),0,true);
                 //Log.d(TAG,d.getPartition_tab_mmcblk0());
 
             }

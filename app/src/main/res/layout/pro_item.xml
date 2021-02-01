@@ -22,15 +22,15 @@
                 android:layout_height="wrap_content">
                 <ImageView
                     android:layout_marginLeft="10dp"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/sys_icon_foreground"/>
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/pro_item_head_foreground"/>
                 <TextView
                     android:ellipsize="marquee"
                     android:id="@+id/rec_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Redmi note 7 pro"
+                    android:text="Xiaomi 6 --sagit"
                     android:layout_gravity="center|left"
                     android:textSize="15dp"/>
             </LinearLayout>
@@ -39,14 +39,36 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:ellipsize="marquee"
-                    android:id="@+id/rec_version"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1.0.0"
-                    android:layout_marginLeft="30dp"/>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_height="20dp">
+                    <TextView
+                        android:ellipsize="marquee"
+                        android:id="@+id/rec_version"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="双boot"
+                        android:layout_marginLeft="30dp"/>
+                    <TextView
+                        android:ellipsize="marquee"
+                        android:id="@+id/atms_viplevel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PUBLIC"
+                        android:layout_marginLeft="30dp"/>
+
+                    <TextView
+                        android:ellipsize="marquee"
+                        android:id="@+id/sdcarddetails"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="64G+64G"
+                        android:layout_marginLeft="30dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
                 <TextView
                     android:ellipsize="end"
                     android:maxLines="2"
@@ -56,10 +78,16 @@
                     android:layout_height="wrap_content"
                     android:text="mgksdgjomfvdoapfkdspgjmopdfsjgaaaaaaamaafpaesmrgpoegrmfpsompofsdmgf'sdpgmeropdfogmpsdfogmsdfogm"
                     android:layout_marginLeft="30dp"/>
+            <TextView
+                android:id="@+id/atms_warnings"
+                android:textColor="#FF00"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="您的帐号权限不足"
+                android:layout_marginLeft="30dp"
+                android:layout_marginVertical="10dp"/>
 
             </LinearLayout>
-
-        </LinearLayout>
         <LinearLayout
             android:layout_weight="1
 "
@@ -70,10 +98,10 @@
                 android:id="@+id/install_rec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/rec_install_foreground"
+                android:src="@drawable/showdetails_foreground"
                 android:layout_gravity="center"
                 android:background="#00000000"/>
         </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>
 
 </androidx.cardview.widget.CardView>

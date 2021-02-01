@@ -3,10 +3,6 @@ package com.highsys.systemchanger;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
-import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.IOException;
@@ -102,10 +98,6 @@ public class DownloadTask extends AsyncTask <String,Integer,Integer>{
      if (progress > lastProgress &&progress>=0){
          listener.onProgress(progress);
          lastProgress=progress;
-         stepthree.process.setText(progress+"%");
-         if (progress==100){
-             stepthree.process.setText("下载完成请继续");
-         }
      }
      if (progress==-100){
          //stepthree.process.setText("下载失败");

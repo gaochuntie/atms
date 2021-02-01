@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#00000000"
+    android:background="#B5B5B5"
     android:id="@+id/draw_view"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context=".power">
+    tools:context="com.highsys.pages.power">
     <LinearLayout
-        android:background="#E1DCDC"
+        android:background="#00E1DCDC"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -28,50 +28,73 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:background="@drawable/as_for_menu"/>
+                <TextView
+                    android:ellipsize="marquee"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dailysaying"
+                    android:text="Welcome to ATMS"
+                    android:textSize="15dp"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#636363"
+                android:gravity="center_vertical"
+                    android:singleLine="true" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="#EBEBEB"
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:orientation="vertical"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="10dp"
             android:layout_marginHorizontal="5dp"
-            android:background="#0000"
-            android:layout_gravity="center"
-            android:layout_height="match_parent">
-            <FrameLayout
-                android:layout_gravity="center"
+            android:layout_marginBottom="10dp">
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#EBEBEB">
-                <ImageView
-                    android:layout_width="match_parent"
-               android:layout_gravity="bottom"
-                    android:layout_height="300dp"
-                    android:src="@drawable/ic_banner_foreground"/>
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="5dp"
+                android:background="#0000"
+                android:layout_gravity="center"
+                android:layout_height="match_parent">
                 <FrameLayout
+                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/allview_con"/>
+                    android:background="#00F4EFEF">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_height="300dp"
+                        android:src="@drawable/ic_banner_foreground"/>
 
-            </FrameLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/allview_con"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:elevation="0dp"
-            app:borderWidth="0dp"
-            app:fabSize="normal"
-            android:backgroundTint="#0000E1FF"
-            android:layout_margin="30dp"
-            app:srcCompat="@drawable/startbutton" />
+                </FrameLayout>
 
-    </LinearLayout>
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    app:elevation="0dp"
+                    app:borderWidth="0dp"
+                    app:fabSize="normal"
+                    android:backgroundTint="#0000E1FF"
+                    android:layout_margin="30dp"
+                    app:srcCompat="@drawable/startbutton" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
     </LinearLayout>
     <com.google.android.material.navigation.NavigationView
         app:menu="@menu/nav_menu"
-        android:background="#FFFFFF"
+        android:background="#D8FFFFFF"
         app:headerLayout="@layout/nav_head"
         android:id="@+id/nav_view"
         android:layout_width="match_parent"

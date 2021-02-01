@@ -1,10 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-  <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="atms_pro.activities.atmsproHome">
+    tools:context=".MainActivity">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+    <!--背景图片-->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/nav_bak"
+        android:scaleType="fitXY"/>
+
+    <!--添加虚化层-->
+    <io.alterac.blurkit.BlurLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:blk_fps="0"
+        app:blk_blurRadius="25"/>
+
+    <!--猫头鹰-->
+    <RelativeLayout
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignTop="@id/bg"
+        android:layout_marginTop="-120dp"
+        >
+
+        <!--头像-->
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:src="@drawable/iconnull"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <!--输入框背景-->
+    <io.alterac.blurkit.BlurLayout
+        android:id="@+id/bg"
+        app:blk_cornerRadius="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/input_bg_shape"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:blk_fps="0"
+        app:blk_blurRadius="20"/>
+
+
+    <!--添加标题和输入框视图-->
+    <LinearLayout
+        android:id="@+id/login_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp">
+
+        <!--标题-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ATMS PRO"
+            android:textColor="#999999"
+            android:textSize="20dp"
+            android:textAlignment="center"/>
+
+        <!--添加输入框-->
+        <EditText
+            android:id="@+id/et_user"
+            style="@style/EditTextStyle"
+            android:inputType="text"
+            android:hint="请输入用户名"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            style="@style/EditTextStyle"
+            android:inputType="textPassword"
+            android:hint="请输入密码"/>
+
+        <!--添加按钮-->
+        <Button
+            android:id="@+id/bt_login"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="登录"
+            android:textColor="#ffffff"
+            android:layout_marginTop="20dp"
+            android:enabled="false"
+            android:background="@drawable/login_btn_selector"/>
+    </LinearLayout>
+            <!--手掌-->
+    <LinearLayout
+                android:layout_centerHorizontal="true"
+                android:id="@+id/iv_left"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_alignBottom="@id/login_linearlayout"
+                android:layout_marginHorizontal="35dp"
+                android:orientation="horizontal" >
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="记住密码但是不自动登录"/>
+        <CheckBox
+            android:id="@+id/remember_password"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/iv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_alignBottom="@+id/iv_left"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="35dp"
+        android:layout_marginBottom="-40dp"
+        android:orientation="horizontal" >
+        <TextView
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="同意使用此功能所需条例"/>
+        <CheckBox
+            android:id="@+id/atms_license"
+            android:background="#00FFFFFF"
+            android:checked="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -6,88 +6,48 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.view.View;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import androidx.core.app.NotificationCompat;
 
-import com.google.android.material.snackbar.Snackbar;
+import com.highsys.pages.install_mobile;
 
 import java.io.File;
 
 public class DownloadService extends Service {
-    private DownloadTask downloadTask;
-    private String downloadurl;
-    private DownloadListener listener=new DownloadListener() {
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        public void onProgress(int progress) {
-            getNotificationManager().notify(1,getNotification("Downloading...",progress));
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        public void onSuccess() {
-            downloadTask=null;
-            stopForeground(true);
-            getNotificationManager().notify(1,getNotification("Download Success",100));
-            Toast.makeText(DownloadService.this,"Download Success",Toast.LENGTH_SHORT).show();
-            stepthree.process.setText("下载成功");
-            install_mobile.next.setVisibility(View.VISIBLE);
-            stepthree.process_pic.setImageResource(R.drawable.dual);
-            install_mobile.NEXTCODE=3;
-        }
-
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        public void onFaild() {
-            downloadTask=null;
-            stopForeground(true);
-            getNotificationManager().notify(1,getNotification("Download Failed",-1));
-            Toast.makeText(DownloadService.this,"Download Failed",Toast.LENGTH_SHORT).show();
-
-        }
-
-        @Override
-        public void onPaused() {
-            downloadTask=null;
-            Toast.makeText(DownloadService.this,"Paused",Toast.LENGTH_SHORT).show();
-
-
-        }
-
-        @Override
-        public void onCanceled() {
-            downloadTask=null;
-            stopForeground(true);
-            Toast.makeText(DownloadService.this,"Canceled",Toast.LENGTH_SHORT).show();
-
-        }
-    };
-
-    private DownloadBinder mbinder=new DownloadBinder();
+    public DownloadTask downloadTask;
+    public String downloadurl;
+    public static DownloadListener listener;
+    public DownloadBinder mbinder=new DownloadBinder();
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return mbinder;
     }
-    class DownloadBinder extends Binder{
+    public class DownloadBinder extends Binder{
         @RequiresApi(api = Build.VERSION_CODES.O)
         public void startDownload(String url){
             if (downloadTask == null){
                 downloadurl=url;
                 downloadTask=new DownloadTask(listener);
                 downloadTask.execute(downloadurl);
-                startForeground(1,getNotification("Downloadimg",0));
+                Log.d("XX","Download rec :"+downloadurl);
+                startForeground(1,getNotification("Working..."));
+
                 //Snackbar.make(stepthree.snackview,"Downloading...",Snackbar.LENGTH_SHORT).show();
+            }else {
+         downloadTask=null;
+                downloadurl=url;
+                downloadTask=new DownloadTask(listener);
+                downloadTask.execute(downloadurl);
+                Log.d("XX","Download rec :"+downloadurl);
+                startForeground(1,getNotification("Working..."));
+
             }
         }
         public void onPauseDownload(){
@@ -101,7 +61,6 @@ public class DownloadService extends Service {
             }
             if (downloadurl!=null){
                 String filename=downloadurl.substring(downloadurl.lastIndexOf("/"));
-                install_mobile.downloaddevicename=filename;
                 String directory="/sdcard/highsys/temp";
                 File file=new File(directory+filename);
                 if (file.exists()){
@@ -114,11 +73,14 @@ public class DownloadService extends Service {
         }
 
     }
-    private NotificationManager getNotificationManager(){
+    public static void setDownloadListener(DownloadListener l){
+        listener=l;
+    }
+    public NotificationManager getNotificationManager(){
         return (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
     }
     @RequiresApi(api = Build.VERSION_CODES.O)
-    private Notification getNotification(String title, int progress) {
+    public Notification getNotification(String title) {
         String CHANNEL_ONE_ID = "CHANNEL_ONE_ID";
         String CHANNEL_ONE_NAME = "CHANNEL_ONE_ID";
         NotificationChannel notificationChannel = null;
@@ -134,34 +96,12 @@ public class DownloadService extends Service {
             NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             manager.createNotificationChannel(notificationChannel);
         }
-        Intent intent = new Intent(this, install_mobile.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
         Notification notification = new Notification.Builder(this).setChannelId(CHANNEL_ONE_ID)
                 .setSmallIcon(R.drawable.iconnull)
                 .setContentTitle(title)
-                .setContentText(progress + "%")
-                .setProgress(100, progress, false)
                 .setOnlyAlertOnce(true)
                 .build();
         notification.flags |= Notification.FLAG_NO_CLEAR;
-        if (progress<0){
-             notification = new Notification.Builder(this).setChannelId(CHANNEL_ONE_ID)
-                    .setSmallIcon(R.drawable.iconnull)
-                    .setContentTitle(title)
-                    .setContentText("下载失败")
-                    .setOnlyAlertOnce(true)
-                    .build();
-            notification.flags |= Notification.FLAG_NO_CLEAR;
-        }else if (progress==100){
-             notification = new Notification.Builder(this).setChannelId(CHANNEL_ONE_ID)
-                    .setSmallIcon(R.drawable.iconnull)
-                    .setContentTitle(title)
-                    .setContentText("下载完成")
-                    .setOnlyAlertOnce(true)
-                    .build();
-            notification.flags |= Notification.FLAG_NO_CLEAR;
-
-        }
         return notification;
     }
  //     Intent intent=new Intent(this,install_mobile.class);

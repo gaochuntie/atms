@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".installsystems">
+    tools:context="com.highsys.pages.installsystems">
     <LinearLayout
         android:orientation="vertical"
 
@@ -25,14 +25,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ATMS"
-            android:textSize="40dp"
+            android:text="ATMS PRO"
+            android:textSize="30dp"
             android:gravity="center"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_marginHorizontal="70dp"
             android:layout_height="wrap_content"
-            android:text="欢迎使用ATMS(原FeO产品)，这是双系统安装工具Linux版，测试为Ubuntu20.4，仅支持@Rannki适配了的机器，你可以访问以下途径获取，此工具可以引领你快速简单的安装双系统而无需进行繁琐的操作\n\n本工具未收取任何费用，禁止一切形式的修改，二次创作\n"
+            android:text="欢迎使用ATMS(原FeO产品)，这是一个免费的安卓多系统切换工具,以后也保持免费.您目前的意图是全自动安装双系统而非切换,请购买ATMS PRO许可.重新进入本页面进行验证"
             android:textSize="15dp"
             android:gravity="center"/>
         <TextView
@@ -40,22 +40,24 @@
             android:layout_marginHorizontal="70dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="\n维护者：\n  - 高纯铁(Coolapk)\n  - 明尼苏达 (Coolapk) \n  - Rannki (Coolapk)"
-            android:layout_marginVertical="30dp"/>
+            android:text="\n维护者：\n  - 高纯铁(Coolapk)\n "
+            android:layout_marginVertical="10dp"/>
 
+        <TextView
+            android:id="@+id/pay_msg"
+            android:layout_marginHorizontal="70dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="购买须知:\n" />
         <LinearLayout
             android:layout_marginVertical="30dp"
             android:gravity="center"
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_height="150dp">
             <ImageView
-                android:layout_width="100dp"
-                android:src="@drawable/feogroup"
-                android:layout_height="match_parent"/>
-            <ImageView
-                android:layout_width="100dp"
+                android:layout_width="200dp"
                 android:src="@drawable/myqq"
                 android:layout_height="match_parent"/>
         </LinearLayout>

@@ -5,11 +5,47 @@
     android:layout_width="match_parent"
 
     android:layout_height="match_parent">
-     <androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/sys_recy"
-    android:layout_width="match_parent"
-    android:background="#00FFFFFF"
-    android:layout_height="match_parent">
+     <FrameLayout
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+          <LinearLayout
+              android:orientation="vertical"
+              android:layout_gravity="center"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+               <TextView
+                   android:layout_marginHorizontal="30dp"
+                   android:id="@+id/nosystemfound"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="没有发现双系统相关文件,你可能需要配置本软件或尝试　[PRO] 进行安装"
+                   android:textSize="20dp"
+                   android:gravity="center"/>
+          </LinearLayout>
+          <FrameLayout
+              android:layout_width="match_parent"
+              android:layout_height="70dp"
+               android:layout_gravity="bottom">
+               <TextView
+                   android:layout_marginRight="70dp"
+                    android:id="@+id/main_notice"
+                   android:ellipsize="marquee"
+                   android:singleLine="true"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:text="COMMON"
+                   android:gravity="center"
+                   />
+          </FrameLayout>
 
-</androidx.recyclerview.widget.RecyclerView>
+          <androidx.recyclerview.widget.RecyclerView
+              android:id="@+id/sys_recy"
+              android:layout_width="match_parent"
+              android:background="#00FFFFFF"
+              android:layout_height="match_parent">
+
+          </androidx.recyclerview.widget.RecyclerView>
+     </FrameLayout>
+
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

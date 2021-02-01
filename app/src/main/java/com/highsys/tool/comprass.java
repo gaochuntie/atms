@@ -1,4 +1,4 @@
-package com.highsys.systemchanger;
+package com.highsys.tool;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -21,6 +21,7 @@ public class comprass {
             throw new FileNotFoundException(srcPath + "不存在！");
         }
 
+
         FileOutputStream out = null;
         ZipOutputStream zipOut = null;
         try {
@@ -42,9 +43,45 @@ public class comprass {
         }
     }
 
+    public static void compressWithoutBaseDir(String srcPath , String dstPath) throws IOException {
+        File srcFile = new File(srcPath);
+        File dstFile = new File(dstPath);
+        if (!srcFile.exists()) {
+            throw new FileNotFoundException(srcPath + "不存在！");
+        }
+
+
+        FileOutputStream out = null;
+        ZipOutputStream zipOut = null;
+        try {
+            out = new FileOutputStream(dstFile);
+            CheckedOutputStream cos = new CheckedOutputStream(out,new CRC32());
+            zipOut = new ZipOutputStream(cos);
+            String baseDir = "";
+            compressWithoutBaseDir(srcFile, zipOut, baseDir);
+        }
+        finally {
+            if(null != zipOut){
+                zipOut.close();
+                out = null;
+            }
+
+            if(null != out){
+                out.close();
+            }
+        }
+    }
+
     private static void compress(File file, ZipOutputStream zipOut, String baseDir) throws IOException{
         if (file.isDirectory()) {
             compressDirectory(file, zipOut, baseDir);
+        } else {
+            compressFile(file, zipOut, baseDir);
+        }
+    }
+    private static void compressWithoutBaseDir(File file, ZipOutputStream zipOut, String baseDir) throws IOException{
+        if (file.isDirectory()) {
+            compressDirectoryWithoutBaseDir(file, zipOut, baseDir);
         } else {
             compressFile(file, zipOut, baseDir);
         }
@@ -55,6 +92,12 @@ public class comprass {
         File[] files = dir.listFiles();
         for (int i = 0; i < files.length; i++) {
             compress(files[i], zipOut, baseDir + dir.getName() + "/");
+        }
+    }
+    private static void compressDirectoryWithoutBaseDir(File dir, ZipOutputStream zipOut, String baseDir) throws IOException{
+        File[] files = dir.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            compress(files[i], zipOut, baseDir );
         }
     }
 

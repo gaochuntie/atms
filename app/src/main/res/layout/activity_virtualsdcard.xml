@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#000000"
     android:orientation="vertical"
-    tools:context=".virtualsdcard">
+    tools:context="com.highsys.pages.virtualsdcard">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

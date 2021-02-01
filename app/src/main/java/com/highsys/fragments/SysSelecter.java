@@ -1,4 +1,4 @@
-package com.highsys.pages;
+package com.highsys.fragments;
 import com.highsys.adapters.SystemAdapter;
 import com.highsys.atms_obj.settings;
 import com.highsys.atms_obj.sysobj;
@@ -30,7 +30,7 @@ import java.util.List;
 public class SysSelecter extends Fragment {
     private TextView nosysfound;
     private SystemAdapter adapter;
-    private List<sysobj> sysobjList=new ArrayList<>();
+    public static List<sysobj> sysobjList=new ArrayList<>();
     private SwipeRefreshLayout reloadsys;
     private  Handler h =new Handler(){
         @Override
@@ -62,6 +62,7 @@ public class SysSelecter extends Fragment {
         reloadsys.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener(){
             @Override
             public void onRefresh() {
+                Log.d("XX",settings.getSYSTEMFILE());
                 reloadsys();
 
             }
@@ -77,7 +78,9 @@ public class SysSelecter extends Fragment {
             @Override
             public void run() {
                 setCommand.resultCom resultCom=null;
+                Log.d("XX","Core TYPE :"+settings.getSDCARDTYPE());
                 if (settings.getSDCARDTYPE().equals("0")){
+                    Log.d("XX","Core TYPE :"+"UFS");
                     resultCom=setCommand.execCommand(new String[]{"cd "+settings.getSYSTEMFILE(),"ls -m sda*"},true,true);
                 }else if (settings.getSDCARDTYPE().equals("1")){
                    resultCom=setCommand.execCommand(new String[]{"cd "+settings.getSYSTEMFILE(),"ls -m sys*"},true,true);
@@ -86,7 +89,13 @@ public class SysSelecter extends Fragment {
                 Log.d("Syslecter", resultCom.ok);
                 s=s.replaceAll("[^0-9a-zA-Z]","");
                 Log.d("Syslecter", s);
-                String[] sl=s.split("sys");
+                String[] sl=null;
+                if (settings.getSDCARDTYPE().equals("0")){
+                    sl=s.split("sda");
+                }else {
+                    sl=s.split("sys");
+                }
+
                 sysobjList.clear();
                 for (int i =1;i<sl.length;i++){
                     if (settings.getSDCARDTYPE().equals("0")){

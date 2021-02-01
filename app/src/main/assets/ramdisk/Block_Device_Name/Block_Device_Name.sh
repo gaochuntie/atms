@@ -3,8 +3,8 @@
 
 
 version=8
-Data_Dir=/data/aaa
-log=/data/aaa
+Data_Dir=/data/highsys/ramdisk/Block_Device_Name
+log=/data/highsys/ramdisk/Block_Device_Name
 jian="$Data_Dir/by_name.log"
 log="$Data_Dir/Block_Device_version.log"
 
@@ -43,9 +43,8 @@ b=(`ls /dev/block/`)
                             File_Type=${size}b
                         fi
                             echo "$BLOCK|$Row 「大小：$File_Type」" >>$jian
-                            echo AAAAA
                     else
-                        echo "$BLOCK|$Row" >>$jian
+                        echo "$BLOCK=$Row!" >>$jian
                     fi
             done
 fi

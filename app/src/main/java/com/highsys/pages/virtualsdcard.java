@@ -1,4 +1,4 @@
-package com.highsys.systemchanger;
+package com.highsys.pages;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -19,6 +19,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.highsys.atms_obj.settings;
+import com.highsys.systemchanger.R;
+import com.highsys.tool.setCommand;
 import com.highsys.tool.tools;
 
 public class virtualsdcard extends AppCompatActivity {

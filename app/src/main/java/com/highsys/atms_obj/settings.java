@@ -1,4 +1,4 @@
-package com.highsys.systemchanger;
+package com.highsys.atms_obj;
 
 import android.text.Editable;
 
@@ -28,6 +28,9 @@ public class settings {
     public static String getIMAGEWORKDIR(){
         return allsettings[4];
     }
+    public static String getSETUPFILE(){
+        return allsettings[8];
+    }
     public static String getSHELLPATH(){
         return allsettings[5];
     }
@@ -49,6 +52,5 @@ public class settings {
     }
     public static void setProcessMsg(String s ){
       processmsg=s;
-
     }
 }

@@ -1,6 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <include layout="@layout/shellexecboard"/>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="#00000000"
+        android:scrollbars="horizontal">
+        <RelativeLayout
+            android:id="@+id/action_button_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_gravity="bottom">
+            <Button
+                android:layout_margin="3dp"
+                android:id="@+id/cleanboard"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:text="清除"/>
+            <Button
+                android:layout_toRightOf="@id/cleanboard"
+                android:layout_margin="3dp"
+                android:id="@+id/stopshell"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:text="刷新"/>
+            <Button
+                android:layout_toRightOf="@id/stopshell"
+                android:layout_margin="3dp"
+                android:id="@+id/showpatition"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:text="分区"/>
+            <Button
+            android:layout_toRightOf="@id/showpatition"
+            android:layout_margin="3dp"
+            android:id="@+id/cd"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:text="CD"/>
+            <Button
+                android:layout_toRightOf="@id/cd"
+                android:layout_margin="3dp"
+                android:id="@+id/scansys"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:text="扫描"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </HorizontalScrollView>
+
+</FrameLayout>

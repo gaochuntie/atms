@@ -20,3 +20,4 @@ ui_print "\n"
 ui_print "Really Start !"
 mkdir /atms
 
+

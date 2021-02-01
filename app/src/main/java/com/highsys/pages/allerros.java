@@ -1,13 +1,20 @@
-package com.highsys.systemchanger;
+package com.highsys.pages;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.highsys.systemchanger.R;
+
+import org.apache.tools.ant.types.resources.comparators.Content;
 
 public class allerros extends AppCompatActivity {
     public static String erromsg = null;
@@ -45,5 +52,17 @@ public class allerros extends AppCompatActivity {
         if (allerros.backpressed == 1) {
             finish();
         }
+    }
+    public static void showErroMsg(Context context,String emsg,int isCancelAble){
+        erromsg=erromsg+"\n  >>"+emsg;
+        backpressed=isCancelAble;
+        context.startActivity(new Intent(context,allerros.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        backpressed=0;
     }
 }

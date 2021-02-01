@@ -1,45 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
             android:id="@+id/choose"
-            android:icon="@drawable/iconnull"
-            android:title="CHOOSE"/>
+            android:icon="@drawable/changesystem_item_foreground"
+            android:title="切换"/>
         <item
-            android:id="@+id/install"
-            android:icon="@drawable/iconnull"
-            android:title="INSTALL"/>
+            android:id="@+id/atms_pro"
+            android:icon="@drawable/pro_item_icon_foreground"
+            android:title="PRO"/>
         <item
             android:id="@+id/help"
-            android:icon="@drawable/iconnull"
-            android:title="HELP"/>
+            android:icon="@drawable/help_item_icon_foreground"
+            android:title="帮助"/>
+        <item
+            android:id="@+id/remote_server"
+            android:icon="@drawable/kefu_item_icon_foreground"
+            android:title="人工"/>
         <item
             android:id="@+id/supportme"
-            android:icon="@drawable/iconnull"
-            android:title="SUPPORT"/>
+            android:icon="@drawable/support_item_icon_foreground"
+            android:title="支持"/>
         <item
             android:id="@+id/settings"
-            android:icon="@drawable/iconnull"
-            android:title="SETTINGS"/>
-        <item
-            android:id="@+id/exitwin"
-            android:icon="@drawable/iconnull"
-            android:title="EXIT"/>
+            android:icon="@drawable/setting_item_icon_foreground"
+            android:title="设置"/>
         <item
             android:id="@+id/backups"
-            android:icon="@drawable/iconnull"
-            android:title="BACKUP"/>
-        <item
-            android:id="@+id/test"
-            android:icon="@drawable/iconnull"
-            android:title="TEST"/>
+            android:icon="@drawable/backup_item_icon_foreground"
+            android:title="备份"/>
+
         <item
             android:id="@+id/advence"
-            android:icon="@drawable/iconnull"
-            android:title="Advence"/>
+            android:icon="@drawable/advence_item_icon_foreground"
+            android:title="高级"/>
+
+        <item
+        android:id="@+id/firmware_backuper"
+        android:icon="@drawable/firm_item_icon_foreground"
+        android:title="底层专区"/>
+
         <item
             android:id="@+id/about"
-            android:icon="@drawable/iconnull"
-            android:title="About"/>
+            android:icon="@drawable/rec_item_icon_foreground"
+            android:title="Recovery市场"/>
+        <item
+            android:id="@+id/shell"
+            android:icon="@drawable/dual_item_icon_foreground"
+            android:title="多系统管理器" />
     </group>
 </menu>

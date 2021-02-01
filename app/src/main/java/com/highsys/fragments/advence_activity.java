@@ -1,4 +1,4 @@
-package com.highsys.pages;
+package com.highsys.fragments;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,13 +17,16 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.highsys.atms_obj.settings;
+import com.highsys.pages.install_mobile;
+import com.highsys.pages.installsystems;
+import com.highsys.pages.processdia;
+import com.highsys.pages.virtualsdcard;
 import com.highsys.systemchanger.MainActivity;
 import com.highsys.systemchanger.MyApplication;
 import com.highsys.systemchanger.R;
-import com.highsys.systemchanger.installsystems;
-import com.highsys.systemchanger.processdia;
-import com.highsys.systemchanger.setCommand;
-import com.highsys.systemchanger.virtualsdcard;
+import com.highsys.tool.setCommand;
+
+import java.io.IOException;
 
 public class advence_activity extends Fragment {
     View view;
@@ -35,10 +38,6 @@ public class advence_activity extends Fragment {
     TextView workpath;
     Button virtualsd;
     Button noavb;
-    Button contrsys1;
-    Button contrsys2;
-    Button contrsys3;
-    Button contrsys4;
     Button installsys;
     Button installmobile;
     ///////
@@ -73,27 +72,18 @@ public class advence_activity extends Fragment {
     }
 
     public void initview(){
-        contrsys1=view.findViewById(R.id.contsys1);;
-        contrsys2=view.findViewById(R.id.contsys2);
-        contrsys3=view.findViewById(R.id.contsys3);
-        contrsys4=view.findViewById(R.id.contsys4);
         unpack=view.findViewById(R.id.unpack);
         repack=view.findViewById(R.id.repack);
         cleanup=view.findViewById(R.id.cleanup);
         flashrec=view.findViewById(R.id.flashrec);
         allrun=view.findViewById(R.id.allrun);
-        workpath=view.findViewById(R.id.workpath);
-        workpath=view.findViewById(R.id.workpath);
+        workpath=view.findViewById(R.id.imgworkspace);
         noavb=view.findViewById(R.id.noavb2);
         workpath.setText(settings.allsettings[4]);
         virtualsd=view.findViewById(R.id.virtualsd);
         installsys=view.findViewById(R.id.installsys);
         installmobile=view.findViewById(R.id.insmobile);
         //
-        contrsys1.startAnimation(MainActivity.translateAnimation);
-        contrsys2.startAnimation(MainActivity.translateAnimation);
-        contrsys3.startAnimation(MainActivity.translateAnimation);
-        contrsys4.startAnimation(MainActivity.translateAnimation);
         unpack.startAnimation(MainActivity.translateAnimation);
         repack.startAnimation(MainActivity.translateAnimation);
         cleanup.startAnimation(MainActivity.translateAnimation);
@@ -105,39 +95,13 @@ public class advence_activity extends Fragment {
         installsys.startAnimation(MainActivity.translateAnimation);
         installmobile.startAnimation(MainActivity.translateAnimation);
         //////////////////////////////////////////
+        workpath.setText(settings.getIMAGEWORKDIR());
         installsys.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i =new Intent(MyApplication.getContext(), installsystems.class);
                 startActivity(i);
                     }
-        });
-        contrsys1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                r=setCommand.execCommand(new String[]{"mkdir /mnt/system1","mkdir /mnt/userdata1","su -c mount -t ext4 /dev/block/by-name/system1 /mnt/system1","mount -t ext4 /dev/block/by-name/systembak /mnt/system1","mount -t ext4 /dev/block/by-name/userdata1 /mnt/userdata1","mount -t ext4 /dev/block/by-name/userdatabak /mnt/userdata1"},true,true);
-                Toast.makeText(MyApplication.getContext(),"请到/mnt/目录下面找到对应系统文件夹编辑！请勿管理当前系统！" ,Toast.LENGTH_LONG).show();
-            }
-        });
-        contrsys2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                r=setCommand.execCommand(new String[]{"mkdir /mnt/system2","mkdir /mnt/userdata2","mount -t ext4 /dev/block/by-name/system2 /mnt/system2","mount -t ext4 /dev/block/by-name/systembak /mnt/system2","mount -t ext4 /dev/block/by-name/userdata2 /mnt/userdata1","mount -t ext4 /dev/block/by-name/userdatabak /mnt/userdata2"},true,false);
-                Toast.makeText(MyApplication.getContext(),"请到/mnt/目录下面找到对应系统文件夹编辑！请勿管理当前系统！",Toast.LENGTH_LONG).show();
-            }
-        });
-        contrsys3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                r=setCommand.execCommand(new String[]{"mkdir /mnt/system3","mkdir /mnt/userdata3","mount -t ext4 /dev/block/by-name/system3 /mnt/system3","mount -t ext4 /dev/block/by-name/systembak /mnt/system3","mount -t ext4 /dev/block/by-name/userdata3 /mnt/userdata1","mount -t ext4 /dev/block/by-name/userdatabak /mnt/userdata3"},true,false);
-                Toast.makeText(MyApplication.getContext(),"请到/mnt/目录下面找到对应系统文件夹编辑！请勿管理当前系统！",Toast.LENGTH_LONG).show();
-            }
-        });
-        contrsys4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MyApplication.getContext(),"当前系统请自行管理",Toast.LENGTH_LONG).show();
-            }
         });
         noavb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,8 +121,8 @@ public class advence_activity extends Fragment {
         installmobile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(MyApplication.getContext(),com.highsys.systemchanger.install_mobile.class);
-                startActivity(i);
+                //startActivity(new Intent(getContext(),install_mobile.class));
+                ((MainActivity)MainActivity.context).replaceFragment(new rec_frag());
             }
         });
         unpack.setOnClickListener(new View.OnClickListener() {
@@ -194,9 +158,15 @@ public class advence_activity extends Fragment {
                         workmsg="明月几时有？等我打包完\n请稍后...";
                         worktitle="正在打包";
                         h.sendEmptyMessage(8);
-                        r=setCommand.execCommand(new String[]{"mv "+settings.allsettings[4]+"ramdisk /data/highsys/"},true,true);
-                        r=setCommand.execCommand(new String[]{"cd /data/highsys/","./repackimg.sh"},true,true);
-                        r=setCommand.execCommand(new String[]{"mv /data/highsys/*.img "+settings.allsettings[4]},true,true);
+                        Process process=null;
+                        try {
+                           process= Runtime.getRuntime().exec("su");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        r=setCommand.execCommand(new String[]{"mv "+settings.allsettings[4]+"ramdisk /data/highsys/"},true,false,process);
+                        r=setCommand.execCommand(new String[]{"cd /data/highsys/","./repackimg.sh"},true,false,process);
+                        r=setCommand.execCommand(new String[]{"mv /data/highsys/*.img "+settings.allsettings[4]},true,false,process);
                         h.sendEmptyMessage(06);
                         worktitle="打包完成！";
                         workmsg="明月天天有！请到您的img目录找到image-new.img刷入吧，记得点击清理哟！如果不清理下一次无法正常工作！";

@@ -22,8 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher_round"/>
+                android:layout_height="70dp"
+                android:src="@drawable/sys_icon_foreground"/>
             <TextView
                 android:id="@+id/sysname"
                 android:layout_width="wrap_content"

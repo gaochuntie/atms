@@ -1,10 +1,11 @@
-package com.highsys.systemchanger;
+package com.highsys.tool;
 
 import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
 import com.highsys.atms_obj.settings;
+import com.highsys.systemchanger.MyApplication;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -14,6 +15,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.PrintWriter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -52,7 +55,7 @@ public class tools {
         UnzipFromAssets.copyAssetsFile2Phone((Activity) context,"bootctl");
         UnzipFromAssets.copyAssetsFile2Phone((Activity) context,"parted");
         UnzipFromAssets.copyAssetsFile2Phone((Activity) context,"prepare-highsys.zip");
-        UnzipFromAssets.copyAssetsFile2Phone((Activity) context,"sgdisk");
+        UnzipFromAssets.copyAssetsFile2Phone((Activity) context,"sgdiskinside");
         UnzipFromAssets.copyAssetsFile2Phone((Activity) context,"vbmeta.img");
         //Unzip(settings.getTempdir()+"aik.zip",settings.getTempdir());
         setCommand.execCommand(new String[]{"cp -r "+settings.getTempdir()+"* /data/highsys/"},true,false);
@@ -195,4 +198,53 @@ public class tools {
         r=setCommand.execCommand(new String[]{"cd /sdcard","mkdir highsys","cd highsys","mkdir backups","mkdir imgwork","mkdir music","mkdir systems","mkdir temp","touch setup.txt","cd /data","mkdir highsys","cd /data/highsys/","mkdir zips","cd /sdcard/highsys/imgwork","mkdir unpack","mkdir repack"},true,true);
         return r.result1;
     }
+
+
+    public static  int dip2px(Context context, float dipValue)
+
+    {
+
+        float m=context.getResources().getDisplayMetrics().density ;
+
+        return (int)(dipValue * m + 0.5f) ;
+
+    }
+
+
+
+    public static  int px2dip(Context context, float pxValue)
+
+    {
+
+        float m=context.getResources().getDisplayMetrics().density ;
+
+        return (int)(pxValue / m + 0.5f) ;
+
+    }
+    /**
+     * 去掉指定字符串的开头的指定字符
+     * @param stream 原始字符串
+     * @param trim 要删除的字符串
+     * @return
+     */
+    public static String StringStartTrim(String stream, String trim) {
+        // null或者空字符串的时候不处理
+        if (stream == null || stream.length() == 0 || trim == null || trim.length() == 0) {
+            return stream;
+        }
+        // 要删除的字符串结束位置
+        int end;
+        // 正规表达式
+        String regPattern = "[" + trim + "]*+";
+        Pattern pattern = Pattern.compile(regPattern, Pattern.CASE_INSENSITIVE);
+        // 去掉原始字符串开头位置的指定字符
+        Matcher matcher = pattern.matcher(stream);
+        if (matcher.lookingAt()) {
+            end = matcher.end();
+            stream = stream.substring(end);
+        }
+        // 返回处理后的字符串
+        return stream;
+    }
+
 }

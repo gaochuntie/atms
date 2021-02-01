@@ -1,4 +1,4 @@
-package com.highsys.systemchanger;
+package com.highsys.pages;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+
+import com.highsys.systemchanger.R;
 
 public class aboutme extends AppCompatActivity {
     Button backto;

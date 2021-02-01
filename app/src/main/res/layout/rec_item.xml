@@ -21,24 +21,26 @@
                 android:orientation="horizontal"
                 android:layout_height="wrap_content">
                 <ImageView
-                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/sys_icon_foreground"/>
                 <TextView
+                    android:ellipsize="marquee"
                     android:id="@+id/rec_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Redmi note 7 pro"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="20dp"/>
+                    android:layout_gravity="center|left"
+                    android:textSize="15dp"/>
             </LinearLayout>
             <LinearLayout
+                android:layout_marginBottom="10dp"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:ellipsize="marquee"
                     android:id="@+id/rec_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,6 +48,9 @@
                     android:layout_marginLeft="30dp"/>
 
                 <TextView
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textSize="10dp"
                     android:id="@+id/rec_details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,12 +66,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent">
             <ImageButton
+                android:scaleType="centerInside"
                 android:id="@+id/install_rec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:src="@drawable/rec_install_foreground"
                 android:layout_gravity="center"
-                android:background="#00FFFFFF"
-                android:src="@drawable/rec_install_foreground"/>
+                android:background="#00000000"/>
         </LinearLayout>
     </LinearLayout>
 
