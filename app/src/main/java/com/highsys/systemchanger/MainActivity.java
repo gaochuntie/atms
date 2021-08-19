@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity {
                 public void run() {
                     OkHttpClient client=new OkHttpClient();
                     Request request=new Request.Builder()
-                            .url("http://59.110.167.17/atms_msg/daily_saying.txt")
+                            .url("http://121.5.103.76/atms_msg/daily_saying.txt")
                             .build();
                     try {
                         Response response=client.newCall(request).execute();

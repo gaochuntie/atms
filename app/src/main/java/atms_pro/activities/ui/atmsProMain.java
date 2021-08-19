@@ -84,8 +84,8 @@ private EndlessScrollview esvNews;
     private static String USERNAME="NAMELESS";
     static String TAG ="ATMSPROMAIN :";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://59.110.167.17:3306/atms_pro";
-    private static final String USER = "pro_selecter";
+    private static final String DB_URL = "jdbc:mysql://121.5.103.76:3306/atms_pro";
+    private static final String USER = "pro_downloader";
     private static  final String axx="mPsbpLGefy";
     private static  final String title="5ZNNfp";
 
@@ -152,7 +152,7 @@ private EndlessScrollview esvNews;
                 public void run() {
                     OkHttpClient client=new OkHttpClient();
                     Request request=new Request.Builder()
-                            .url("http://59.110.167.17/atms_msg/pro_notice.txt")
+                            .url("http://121.5.103.76/atms_msg/pro_notice.txt")
                             .build();
                     try {
                         Response response=client.newCall(request).execute();
@@ -720,7 +720,7 @@ private EndlessScrollview esvNews;
             @Override
             public void run() {
                 FtpUtils ftpUtils=new FtpUtils();
-                boolean result= ftpUtils.downLoadFTP(ftpUtils.getFTPClient("59.110.167.17",21,"pro_downloader","Tm2tJa8PA4eZZsci"),"ADDON/",PROJECT.getRec_remote_local().substring(PROJECT.getRec_remote_local().lastIndexOf("/")+1),"/sdcard/highsys/temp/");
+                boolean result= ftpUtils.downLoadFTP(ftpUtils.getFTPClient("121.5.103.76",21,"pro_downloader","JxMXJTGFSnhL8mNT"),"ADDON/",PROJECT.getRec_remote_local().substring(PROJECT.getRec_remote_local().lastIndexOf("/")+1),"/sdcard/highsys/temp/");
                 if (result){
                     setCommand.execCommand(new String[]{"mkdir /mnt/atms_cache","mount /dev/block/bootdevice/by-name/cache /mnt/atms_cache","echo -e \"--update_package=/sdcard/highsys/temp/"+PROJECT.getRec_remote_local().substring(PROJECT.getRec_remote_local().lastIndexOf("/")+1)+"\" > /mnt/atms_cache/recovery/command","touch 79AE5BCD.log /mnt/atms_cache/","echo start_at_20200101 >>/mnt/atms_cache/79AE5BCD.log","reboot recovery"},true,false);
                 }else{

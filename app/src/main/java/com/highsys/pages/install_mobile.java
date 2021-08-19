@@ -45,9 +45,12 @@ import java.sql.SQLException;
 public class install_mobile extends AppCompatActivity implements View.OnClickListener {
     TextView textView;
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://59.110.167.17:3306/atms";
-    static final String USER = "atms_admin";
-    static final String PASS = "pjz4o0ma";
+    static final String DB_URL = "jdbc:mysql://121.5.103.76:3306/atms";
+    private static final String USER = "pro_downloader";
+    private static  final String axx="mPsbpLGefy";
+    private static  final String title="5ZNNfp";
+
+    static final String PASS = axx+title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

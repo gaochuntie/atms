@@ -465,7 +465,7 @@ public class FirmwareKit extends Fragment implements View.OnClickListener {
             public void run() {
                 OkHttpClient client=new OkHttpClient();
                 Request request=new Request.Builder()
-                        .url("http://59.110.167.17/atms_msg/firmware_notice.txt")
+                        .url("http://121.5.103.76/atms_msg/firmware_notice.txt")
                         .build();
                 try {
                     Response response=client.newCall(request).execute();

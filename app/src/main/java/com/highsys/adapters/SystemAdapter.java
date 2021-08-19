@@ -100,7 +100,12 @@ public class SystemAdapter extends RecyclerView.Adapter<SystemAdapter.ViewHolder
                     Log.d("change",s.getDtbo_path());
                     Log.d("change",s.getID());
                     Log.d("change",s.getPartition_tab_sda());
-                    setCommand.execCommand(new String[]{"dd if="+s.getPartition_tab_sda()+" bs=512 count=1024 of=/dev/block/sda","dd if="+s.getPartition_tab_sde()+" bs=512 count=1024 of=/dev/block/sde","dd if="+s.getPartition_tab_sdf()+" bs=512 count=1024 of=/dev/block/sdf","dd if="+s.getBoot_path()+" of=/dev/block/bootdevice/by-name/boot","dd if="+s.getDtbo_path()+" of=/dev/block/bootdevice/by-name/dtbo","reboot"},true,false);
+                    Log.d("change",s.getPartition_tab_sdb());
+                    Log.d("change",s.getPartition_tab_sdc());
+                    Log.d("change",s.getPartition_tab_sdd());
+                    Log.d("change",s.getPartition_tab_sde());
+                    Log.d("change",s.getPartition_tab_sdf());
+                    setCommand.execCommand(new String[]{"dd if="+s.getPartition_tab_sda()+" bs=512 count=1024 of=/dev/block/sda","dd if="+s.getPartition_tab_sde()+" bs=512 count=1024 of=/dev/block/sde","dd if="+s.getPartition_tab_sdf()+" bs=512 count=1024 of=/dev/block/sdf","dd if="+s.getPartition_tab_sdb()+" bs=512 count=1024 of=/dev/block/sdb","dd if="+s.getPartition_tab_sdc()+" bs=512 count=1024 of=/dev/block/sdc","dd if="+s.getPartition_tab_sdd()+" bs=512 count=1024 of=/dev/block/sdd","dd if="+s.getBoot_path()+" of=/dev/block/bootdevice/by-name/boot","dd if="+s.getDtbo_path()+" of=/dev/block/bootdevice/by-name/dtbo","reboot"},true,false);
                 }
                 if (settings.getSDCARDTYPE().equals("1")){
                     //emmc

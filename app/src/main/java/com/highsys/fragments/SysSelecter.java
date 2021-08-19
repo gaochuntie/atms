@@ -100,7 +100,7 @@ public class SysSelecter extends Fragment {
                 for (int i =1;i<sl.length;i++){
                     if (settings.getSDCARDTYPE().equals("0")){
                         //ufs
-                        sysobjList.add(new sysobj(sl[(i)],settings.getSYSTEMFILE()+"dtbo"+sl[i],settings.getSYSTEMFILE()+"boot"+sl[i],settings.getSYSTEMFILE()+"sda"+sl[i],settings.getSYSTEMFILE()+"sde"+sl[i] ,settings.getSYSTEMFILE()+"sdf"+sl[i]));
+                        sysobjList.add(new sysobj(sl[(i)],settings.getSYSTEMFILE()+"dtbo"+sl[i],settings.getSYSTEMFILE()+"boot"+sl[i],settings.getSYSTEMFILE()+"sda"+sl[i],settings.getSYSTEMFILE()+"sde"+sl[i] ,settings.getSYSTEMFILE()+"sdf"+sl[i],settings.getSYSTEMFILE()+"sdb"+sl[i],settings.getSYSTEMFILE()+"sdc"+sl[i],settings.getSYSTEMFILE()+"sdd"+sl[i]));
                     } else if (settings.getSDCARDTYPE().equals("1")){
                         //emmc
                         sysobjList.add(new sysobj(sl[(i)],settings.getSYSTEMFILE()+"dtbo"+sl[i],settings.getSYSTEMFILE()+"boot"+sl[i],settings.getSYSTEMFILE()+"sys"+sl[i]) );

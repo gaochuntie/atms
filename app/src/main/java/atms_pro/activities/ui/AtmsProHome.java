@@ -41,10 +41,12 @@ private int level;
     private static String USERNAME="NAMELESS";
     static String TAG ="ATMSPROHOME";
     private static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://59.110.167.17:3306/atms_pro";
-    private static final String USER = "pro_selecter";
+    private static final String DB_URL = "jdbc:mysql://121.5.103.76:3306/atms_pro";
+    private static final String USER = "pro_downloader";
     private static  final String axx="mPsbpLGefy";
     private static  final String title="5ZNNfp";
+
+    static final String PASS = axx+title;
 
     private EditText user;
     private EditText password;
@@ -292,5 +294,4 @@ private int level;
         }).start();
 
     }
-    String PASS=axx+title;
 }

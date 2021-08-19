@@ -68,7 +68,7 @@ public class thehelps extends AppCompatActivity {
 
                 OkHttpClient client=new OkHttpClient();
                 Request request=new Request.Builder()
-                        .url("http://59.110.167.17/atms_help_msg.txt")
+                        .url("http://121.5.103.76/atms_help_msg.txt")
                         .build();
                 try {
                     Response response=client.newCall(request).execute();
