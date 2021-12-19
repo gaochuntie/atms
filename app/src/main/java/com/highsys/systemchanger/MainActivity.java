@@ -8,7 +8,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -57,6 +60,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -316,13 +320,13 @@ public class MainActivity extends AppCompatActivity {
 
                         remote.setIcon(R.drawable.iconnull);
                         remote.setTitle("远程服务");
-                        remote.setMessage("您即将联系ATMS认证人工服务人员，请注意数据备份，并且同意设备风险自行承担这一项！　可能会收取一定的费用．");
+                        remote.setMessage("您即将联系ATMS认证人工服务人员(me)，请注意数据备份，并且同意设备风险自行承担这一项！　可能会收取一定的费用．只有法定节假日空闲");
                         remote.setCancelable(true);
                         remote.setPositiveButton("访问", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 try {
-                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mqqapi://card/show_pslcard?src_type=internal&source=sharecard&version=1&uin=987589769")));//跳转到QQ资
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mqqapi://card/show_pslcard?src_type=internal&source=sharecard&version=1&uin=2041469901")));//跳转到QQ资
                                 }catch (Exception e){
                                     Snackbar.make(nav_view,"无法打开QQ,请安装最新版QQ.\n"+e.getMessage(),Snackbar.LENGTH_SHORT).show();
                                     e.printStackTrace();
@@ -377,8 +381,47 @@ public class MainActivity extends AppCompatActivity {
 
         //setupfile
         showpross("海内存知己，天涯若比邻\n请稍等...","ATMS正在启动");
-
+        getvavHeader();
         testsetupfile();
+
+    }
+
+
+    //Define
+
+    public void getvavHeader(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                OkHttpClient client=new OkHttpClient();
+                Request request=new Request.Builder()
+                        .url("http://121.5.103.76/atms_msg/navheader.picture")
+                        .build();
+                try {
+                    Response response=client.newCall(request).execute();
+                    final byte[] msg =response.body().bytes();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Bitmap navheader= BitmapFactory.decodeByteArray(msg,0,msg.length);
+                            ImageView navheader_view=  findViewById(R.id.nav_herder_image);
+                            navheader_view.setImageBitmap(navheader);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ImageView navheader_view=  findViewById(R.id.nav_herder_image);
+                            navheader_view.setBackgroundResource(R.drawable.atms_icon);
+                        }
+                    });
+                }
+
+
+            }
+        }).start();
 
     }
 

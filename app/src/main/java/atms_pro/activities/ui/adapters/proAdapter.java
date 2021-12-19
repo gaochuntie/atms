@@ -84,16 +84,20 @@ public class proAdapter extends RecyclerView.Adapter<proAdapter.ViewHolder> {
         holder.require_level.setText(d.getRequire_level());
         holder.sdcard_cutway.setText(d.getSdcard_cutway());
 
-        if (atmsProMain.viplevel>=Integer.valueOf(d.getRequire_level())){
-            holder.warnings.setTextColor(Color.GREEN);
-            holder.warnings.setText("您有权使用此条内容");
+        if (d.getType().equals("android")){
+            if (atmsProMain.viplevel>=Integer.valueOf(d.getRequire_level())){
+                holder.warnings.setTextColor(Color.GREEN);
+                holder.warnings.setText("您有权使用此条内容");
 
+            }else{
+                holder.warnings.setTextColor(Color.RED);
+                holder.warnings.setText("您无权使用此条内容");
+
+            }
         }else{
-            holder.warnings.setTextColor(Color.RED);
-            holder.warnings.setText("您无权使用此条内容");
-
+            holder.warnings.setTextColor(Color.YELLOW);
+            holder.warnings.setText("Platform : "+d.getType());
         }
-
 
         //holder.rec_at.startAnimation(animation);
         ObjectAnimator.ofFloat(holder.rec_at,"translationX",-200,0).setDuration(500).start();

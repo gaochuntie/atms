@@ -228,6 +228,14 @@
                             android:id="@+id/rec_device_size"
                             android:layout_marginStart="10dp"
                             android:entries="@array/rec_device_size"/>
+                        <Button
+                            android:id="@+id/switch_platform"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/buttonshape"
+                            android:text="所有平台"
+                            android:layout_marginLeft="15dp"/>
 
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView

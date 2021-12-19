@@ -49,12 +49,17 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.highsys.pages.allerros;
 import com.highsys.pages.processdia;
 import com.highsys.systemchanger.DownloadService;
 import com.highsys.systemchanger.R;
+import com.highsys.tool.Data_formater;
 import com.highsys.tool.FtpUtils;
 import com.highsys.tool.setCommand;
+import com.kongzue.dialogx.dialogs.BottomMenu;
+import com.kongzue.dialogx.dialogs.PopTip;
+import com.kongzue.dialogx.interfaces.OnMenuItemClickListener;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
@@ -71,15 +76,16 @@ import java.util.Locale;
 import java.util.TreeMap;
 
 import static com.highsys.systemchanger.MainActivity.context;
+import static com.highsys.tool.Data_formater.printMsg;
 
 public class atmsProMain extends AppCompatActivity {
     public static int viplevel;
     public static String username;
     public static String userid;
+    private int selectMenuIndex=0;
 //copy
 private EndlessScrollview esvNews;
-    int name_counter=0;
-    int size_counter=0;
+     int rl_counter=0;
     private static String PASSWORD="UNKNOW";
     private static String USERNAME="NAMELESS";
     static String TAG ="ATMSPROMAIN :";
@@ -110,6 +116,7 @@ private EndlessScrollview esvNews;
     TextView id;
     TextView level;
     TextView mydevice;
+    Button switch_platform;
 
     public static atmsProMain atmsProMain_instance=null;
 
@@ -124,6 +131,11 @@ private EndlessScrollview esvNews;
                     recyclerView.setAdapter(adapter);
                     break;
                 case 8:
+                    break;
+                case 5:
+                    //All init , reload available
+                    Reload_FLAG=true;
+                    reloadrecBySizeAndName();
                     break;
                 default:
                     break;
@@ -220,16 +232,16 @@ private EndlessScrollview esvNews;
                 }else {
                     _name=name_list[i];
                 }
-                if (name_counter>=1){
-                    Log.d("COUNTER NAME :", String.valueOf(name_counter));
-                    swipeRefreshLayout.setRefreshing(true);
-                    reloadrecBySizeAndName();
-                }
-
-                if (dia_fag>=3){
-                    //忽略自动选择的刷新
-                }
-                name_counter++;
+//                if (name_counter>=1){
+//                    Log.d("COUNTER NAME :", String.valueOf(name_counter));
+//                    swipeRefreshLayout.setRefreshing(true);
+//                    reloadrecBySizeAndName();
+//                }
+//
+//                if (dia_fag>=3){
+//                    //忽略自动选择的刷新
+//                }
+//                name_counter++;
             }
 
             @Override
@@ -247,12 +259,12 @@ private EndlessScrollview esvNews;
                 }else {
                     _size=size_list[i];
                 }
-                if (size_counter>=0){
-                    Log.d("COUNTER SIZE :", String.valueOf(size_counter));
-                    swipeRefreshLayout.setRefreshing(true);
-                    reloadrecBySizeAndName();
-                }
-                size_counter++;
+//                if (size_counter>=0){
+//                    Log.d("COUNTER SIZE :", String.valueOf(size_counter));
+//                    swipeRefreshLayout.setRefreshing(true);
+//                    reloadrecBySizeAndName();
+//                }
+//                size_counter++;
             }
 
             @Override
@@ -266,7 +278,10 @@ private EndlessScrollview esvNews;
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                rl_counter++;
+                Log.d(TAG,"Refresh times :"+rl_counter);
                 reloadrecBySizeAndName();
+
             }
         });
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(atmsProMain.this);
@@ -274,7 +289,7 @@ private EndlessScrollview esvNews;
         adapter=new proAdapter(reclist);
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
-        load_rec_device_namelist();
+
         //reloadrecBySizeAndName();
         Intent intent=new Intent(atmsProMain.this,DownloadService.class);
         startService(intent);
@@ -300,7 +315,7 @@ private EndlessScrollview esvNews;
         level=findViewById(R.id.viplevel);
         switch (viplevel){
             case 0 :
-                level.setText("不正常帐号");
+                level.setText("公共帐号");
                 break;
             case 1 :
                 level.setText("普通帐号");
@@ -337,7 +352,50 @@ private EndlessScrollview esvNews;
         }
         mydevice=findViewById(R.id.mydevice);
         mydevice.setText(Build.DEVICE);
+        switch_platform=findViewById(R.id.switch_platform);
+        switch_platform.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //switch platform
 
+
+                BottomMenu.show(new String[]{"All platform", "android", "windows", "linux","mac"})
+                        .setMessage("请选择目标平台")
+                        .setTitle("Switch Platform")
+                        .setOnMenuItemClickListener(new OnMenuItemClickListener<BottomMenu>() {
+                            @Override
+                            public boolean onClick(BottomMenu dialog, CharSequence text, int index) {
+                                //记录已选择值
+                                selectMenuIndex = index;
+                                switch (selectMenuIndex){
+                                    case 0:
+                                        switch_platform.setText("所有平台");
+                                        break;
+                                    case 1:
+                                        switch_platform.setText("Android");
+                                        break;
+                                    case 2:
+                                        switch_platform.setText("Windows");
+                                        break;
+                                    case 3:
+                                        switch_platform.setText("Linux");
+                                        break;
+                                    case 4:
+                                        switch_platform.setText("Mac");
+                                        break;
+                                    default:
+                                        switch_platform.setText("All");
+                                        break;
+                                }
+                                swipeRefreshLayout.setRefreshing(true);
+                                reloadrecBySizeAndName();
+                                return false;
+                            }
+                        })
+                        .setSelection(selectMenuIndex);		//指定已选择的位置
+
+            }
+        });
         noticeBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -349,7 +407,7 @@ private EndlessScrollview esvNews;
                 alert.create().show();
             }
         });
-
+        load_rec_device_namelist();
     }
 
     public void check_doublesystem(){
@@ -398,7 +456,14 @@ private EndlessScrollview esvNews;
         }
         return String.format(Locale.getDefault(), " %.2f %s", size, units[index]);
     }
+
+
+    private boolean Reload_FLAG=false;
     public  void  reloadrecBySizeAndName(){
+
+        if (Reload_FLAG==false){
+            return;
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -432,7 +497,7 @@ private EndlessScrollview esvNews;
                         // 展开结果集数据库
                         while(rs.next()){
                             // 通过字段检索
-                            String [] temp=new String[10];
+                            String [] temp=new String[20];
                             temp[1]=rs.getString("title");
                             temp[2]=rs.getString("version");
                             temp[3]=rs.getString("details");
@@ -441,13 +506,80 @@ private EndlessScrollview esvNews;
                             temp[6]=rs.getString("size");
                             temp[7]=rs.getString("require_level");
                             temp[8]=rs.getString("sdcard_cutway");
+                            temp[9]=rs.getString("app_type");
+                            temp[10]=rs.getString("full_key_value_prop");
+                            temp[11]=rs.getString("flashable_type");
+                            temp[12]=rs.getString("pt_source");
+                            temp[13]=rs.getString("input_settings_translate");
+                            temp[14]=rs.getString("pt_filesystem");
+                            temp[15]=rs.getString("isMultiBoot");
+                            temp[16]=rs.getString("flash_order");
+
                             String [] required_items= rs.getString("required_settings").split(":");
-                            pro_obj tem=new pro_obj(temp[1],temp[2],temp[3],temp[5],temp[4],temp[6],temp[7],temp[8],required_items);
+                            pro_obj tem=new pro_obj(temp[1],temp[2],temp[3],temp[5],temp[4],temp[6],temp[7],temp[8],required_items,temp[9]);
+                            Data_formater data_formater=new Data_formater();
+
+
+                            tem.setExtraMap(data_formater.Data_to_Map(temp[10]));
+                            tem.setFlashable_type(temp[11]);
+                            tem.setPt_sources(data_formater.Data_to_StringArry(temp[12]));
+                            tem.setInput_item_translate_Map(data_formater.Data_to_Map(temp[13]));
+                            tem.setPt_filesystem_Map(data_formater.Data_to_Map(temp[14]));
+
+                            tem.setFlash_order(temp[16].split(";"));
+                            if (temp[15].equals("0")) {
+                                tem.setIsMultiBoot(false);
+
+                            }else if (temp[15].equals("1")) {
+                                tem.setIsMultiBoot(true);
+                            }else{
+                                PopTip.show(R.drawable.iconnull, "Unknown value for (boolean)IsMultiBoot", "FuckBack");
+
+                                printMsg("Unknown value for (boolean)IsMultiBoot");
+                            }
+
                             if (tem.getSize().equals(_size) || _size.equals("")){
                                 if (tem.getName().equals(_name) || _name.equals("")){
-                                    Log.d(TAG,"Device000001 : "+_name+"|"+_size);
-                                    reclist.add(tem);
-                                    Log.d(TAG,tem.getRectitle()+":"+tem.getRec_remote_local());
+
+
+                                    switch (selectMenuIndex){
+
+                                        //"All platform", "android", "windows", "linux","mac"
+                                        case 0:
+                                            Log.d(TAG,"Add item :  "+tem.getType()+"|"+tem.getRectitle()+":"+tem.getRec_remote_local());
+                                            reclist.add(tem);
+                                            break;
+                                        case 1:
+                                            if (tem.getType().equals("android")){
+                                                Log.d(TAG,"Add item :  "+tem.getType()+"|"+tem.getRectitle()+":"+tem.getRec_remote_local());
+                                                reclist.add(tem);
+                                            }
+                                            break;
+                                        case 2:
+                                            if (tem.getType().equals("windows")){
+                                                Log.d(TAG,"Add item :  "+tem.getType()+"|"+tem.getRectitle()+":"+tem.getRec_remote_local());
+                                                reclist.add(tem);
+                                            }
+                                            break;
+                                        case 3:
+                                            if (tem.getType().equals("linux")){
+                                                Log.d(TAG,"Add item :  "+tem.getType()+"|"+tem.getRectitle()+":"+tem.getRec_remote_local());
+                                                reclist.add(tem);
+                                            }
+                                            break;
+                                        case 4:
+                                            if (tem.getType().equals("mac")){
+                                                Log.d(TAG,"Add item :  "+tem.getType()+"|"+tem.getRectitle()+":"+tem.getRec_remote_local());
+                                                reclist.add(tem);
+                                            }
+                                            break;
+                                        default:
+                                            Log.d(TAG,"Add item :  "+tem.getType()+"|"+tem.getRectitle()+":"+tem.getRec_remote_local());
+                                            reclist.add(tem);
+                                            break;
+                                    }
+
+
                                 }
                                 Log.d(TAG,"For while test 00002");
                             }
@@ -570,13 +702,14 @@ private EndlessScrollview esvNews;
                             rec_deviec_name.setAdapter(new ArrayAdapter<String>(atmsProMain.this,R.layout.support_simple_spinner_dropdown_item,name_list));
                             swipeRefreshLayout.setRefreshing(true);
                             processdia.setProcess(processdia.PROCESS_FINISH);
-                            reloadrecBySizeAndName();
+                            h.sendEmptyMessage(5);
+                            //reloadrecBySizeAndName();
 
                         }
                     });
                 }catch (Exception e){
                     processdia.setProcess(processdia.PROCESS_FINISH);
-                    allerros.showErroMsg(atmsProMain.this,e.getMessage(),allerros.BACKPRESSDISABLE);
+                    allerros.showErroMsg(atmsProMain.this,e.getMessage(),allerros.BACKPRESSENABLE);
                     e.printStackTrace();
                 }
             }
@@ -625,13 +758,22 @@ private EndlessScrollview esvNews;
         isaccesss=contentView.findViewById(R.id.isaccess);
         install_instruction=contentView.findViewById(R.id.install_instruction);
         isntall=contentView.findViewById(R.id.install_buttton);
-        if (Integer.valueOf(item.getRequire_level())<=viplevel){
-            isaccesss.setVisibility(View.GONE);
-            isntall.setVisibility(View.VISIBLE);
+
+        if (item.getType().equals("android")){
+            if (Integer.valueOf(item.getRequire_level())<=viplevel){
+                isaccesss.setVisibility(View.GONE);
+                isntall.setVisibility(View.VISIBLE);
+            }else{
+                isaccesss.setVisibility(View.VISIBLE);
+                isaccesss.setText("你没有权限使用这个项目");
+                isntall.setVisibility(View.INVISIBLE);
+            }
         }else{
             isaccesss.setVisibility(View.VISIBLE);
+            isaccesss.setText("不支持此平台："+item.getType());
             isntall.setVisibility(View.INVISIBLE);
         }
+
         install_instruction.setText(item.getRecdetails().toString());
         //
 

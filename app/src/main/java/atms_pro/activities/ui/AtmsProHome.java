@@ -54,6 +54,7 @@ private int level;
     private LinearLayout leftHand;
     private LinearLayout rightHand;
     private CheckBox atms_licence;
+    private CheckBox use_public_account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +71,8 @@ private int level;
         loginBtn = findViewById(R.id.bt_login);
         leftHand = findViewById(R.id.iv_left);
         rightHand = findViewById(R.id.iv_right);
-
+        use_public_account=findViewById(R.id.remember_password);
+        use_public_account.setOnClickListener(this);
         loginBtn.setOnClickListener(this);
         //监听内容改变 -> 控制按钮的点击状态
         user.addTextChangedListener(this);
@@ -185,6 +187,15 @@ private int level;
                     Snackbar.make(loginBtn,"请同意使用条例...",Snackbar.LENGTH_SHORT).show();
                 }
 
+                break;
+            case R.id.remember_password:
+                if (use_public_account.isChecked()){
+                    user.setText("ATMS_PUBLIC");
+                    password.setText("520gaochuntie");
+                }else{
+                    user.setText("");
+                    password.setText("");
+                }
                 break;
             default:
                 break;

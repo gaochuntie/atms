@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+    android:id="@+id/nav_header"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -23,10 +24,11 @@
             android:layout_height="match_parent"
             android:layout_width="match_parent">
             <ImageView
-                android:scaleType="center"
+                android:id="@+id/nav_herder_image"
+                android:scaleType="fitCenter"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/nav_head"/>
+                android:src="@drawable/icon"/>
 
         </LinearLayout>
 

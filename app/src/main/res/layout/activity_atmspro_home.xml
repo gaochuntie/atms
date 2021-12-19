@@ -10,7 +10,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/nav_bak"
+        android:src="@drawable/atmspro_login_back"
         android:scaleType="fitXY"/>
 
     <!--添加虚化层-->
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="ATMS PRO"
-            android:textColor="#999999"
+            android:textColor="#FFF409"
             android:textSize="20dp"
             android:textAlignment="center"/>
 
@@ -76,12 +76,16 @@
         <EditText
             android:id="@+id/et_user"
             style="@style/EditTextStyle"
+            android:textColorHint="#7B1FA2"
+            android:textColor="#70009F"
             android:inputType="text"
             android:hint="请输入用户名"/>
 
         <EditText
             android:id="@+id/et_password"
             style="@style/EditTextStyle"
+            android:textColorHint="#7B1FA2"
+            android:textColor="#70009F"
             android:inputType="textPassword"
             android:hint="请输入密码"/>
 
@@ -91,7 +95,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:text="登录"
-            android:textColor="#ffffff"
+
+            android:textColor="#D32F2F"
             android:layout_marginTop="20dp"
             android:enabled="false"
             android:background="@drawable/login_btn_selector"/>
@@ -109,7 +114,8 @@
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="记住密码但是不自动登录"/>
+            android:textColor="#F57C00"
+            android:text="以视察帐号登录(仅查看)"/>
         <CheckBox
             android:id="@+id/remember_password"
             android:layout_width="wrap_content"
@@ -126,6 +132,7 @@
         android:layout_marginBottom="-40dp"
         android:orientation="horizontal" >
         <TextView
+            android:textColor="#F57C00"
             android:gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
