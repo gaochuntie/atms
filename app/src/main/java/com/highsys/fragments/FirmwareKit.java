@@ -252,12 +252,12 @@ public class FirmwareKit extends Fragment implements View.OnClickListener {
                         if (meta.exists()){
                             meta.renameTo(new File(cache.getPath()+"/META-INF"));
                         }else {
-                            allerros.showErroMsg(getContext(),"文件夹META-INF不存在,关闭软件重试",allerros.BACKPRESSDISABLE);
+                            allerros.showErroMsg(getContext(),"文件夹META-INF不存在,关闭软件重试",allerros.BACKPRESSENABLE);
                             break;
                         }
                     }
                     if (!script.exists()){
-                        allerros.showErroMsg(getContext(),"恢复脚本初始文件不存在！关闭软件",allerros.BACKPRESSDISABLE);
+                        allerros.showErroMsg(getContext(),"恢复脚本初始文件不存在！关闭软件",allerros.BACKPRESSENABLE);
                         break;
                     }
                     scriptwriter=new BufferedWriter(new FileWriter(script,true));
