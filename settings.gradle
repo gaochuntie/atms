@@ -1,2 +1,2 @@
 include ':app'
-rootProject.name='三氧化二铁'
+rootProject.name='atms'
